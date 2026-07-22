@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Выберите категорию проблемы, чтобы пройти короткую диагностику перед созданием заявки в IT." />
+  <title>Диагностика проблемы — IT Navigator</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+<body class="page-shell" data-page="help">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="IT Navigator — на главную">
+        <span class="brand-mark" aria-hidden="true">IN</span>
+        <span class="brand-text">IT Navigator</span>
+      </a>
+      <nav class="nav-desktop" aria-label="Основная навигация">
+        <a class="nav-link" data-role-nav="employee it" href="knowledge-base.html">База знаний</a>
+        <a class="nav-link" data-role-nav="employee" href="services.html">Услуги</a>
+        <a class="nav-link" data-role-nav="employee" href="missions.html">Миссии</a>
+        <a class="nav-link" data-role-nav="it" href="tickets.html">Заявки</a>
+        <a class="nav-link" data-role-nav="it" href="dashboard.html">IT-панель</a>
+        <a class="nav-link" data-role-nav="employee it" href="profile.html">Профиль</a>
+      </nav>
+      <div class="header-actions">
+        <select class="role-switch" id="roleSwitch" aria-label="Роль пользователя">
+          <option value="employee">Сотрудник</option>
+          <option value="it">IT-отдел</option>
+        </select>
+        <a class="button button--primary" href="help.html">Нужна помощь</a>
+        <button type="button" class="nav-toggle" aria-label="Меню" aria-expanded="false" aria-controls="navMobile">☰</button>
+      </div>
+    </div>
+    <nav class="nav-mobile container" id="navMobile" aria-label="Мобильная навигация">
+      <a data-role-nav="employee it" href="knowledge-base.html">База знаний</a>
+      <a data-role-nav="employee" href="services.html">Услуги</a>
+      <a data-role-nav="employee" href="missions.html">Миссии</a>
+      <a data-role-nav="it" href="tickets.html">Заявки</a>
+      <a data-role-nav="it" href="dashboard.html">IT-панель</a>
+      <a data-role-nav="employee it" href="profile.html">Профиль</a>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <h1>Диагностика проблемы</h1>
+          <p class="section-lead">Выберите категорию — мы зададим пару уточняющих вопросов и предложим проверенные шаги, прежде чем создавать заявку специалисту.</p>
+        </div>
+      </div>
+
+      <div class="route-progress" aria-label="Этапы диагностики">
+        <div class="route-step is-current" data-diag-phase="problem">1. Проблема</div>
+        <div class="route-step" data-diag-phase="check">2. Проверка</div>
+        <div class="route-step" data-diag-phase="solution">3. Решение</div>
+        <div class="route-step" data-diag-phase="ticket">4. Заявка</div>
+      </div>
+
+      <div class="category-grid" role="list" aria-label="Категории проблем">
+        <button type="button" class="category-card" data-category="login" role="listitem" aria-label="Не могу войти">
+          <div class="icon-tile" aria-hidden="true">🔐</div>
+          <h3>Не могу войти</h3>
+          <p class="text-muted">Проблемы с паролем, учётной записью или двухфакторной авторизацией</p>
+        </button>
+        <button type="button" class="category-card" data-category="network" role="listitem" aria-label="Интернет или VPN">
+          <div class="icon-tile icon-tile--teal" aria-hidden="true">🌐</div>
+          <h3>Интернет или VPN</h3>
+          <p class="text-muted">Нет сети, медленное соединение, ошибки VPN или корпоративного Wi-Fi</p>
+        </button>
+        <button type="button" class="category-card" data-category="device" role="listitem" aria-label="Устройство">
+          <div class="icon-tile" aria-hidden="true">💻</div>
+          <h3>Устройство</h3>
+          <p class="text-muted">Ноутбук, монитор, периферия, зарядка, перезагрузка</p>
+        </button>
+        <button type="button" class="category-card" data-category="software" role="listitem" aria-label="Программа">
+          <div class="icon-tile icon-tile--teal" aria-hidden="true">📦</div>
+          <h3>Программа</h3>
+          <p class="text-muted">CRM, офисные приложения, ошибки запуска или обновления</p>
+        </button>
+        <button type="button" class="category-card" data-category="access" role="listitem" aria-label="Доступ">
+          <div class="icon-tile" aria-hidden="true">🗝️</div>
+          <h3>Доступ</h3>
+          <p class="text-muted">Права к системам, папкам, сервисам и внутренним ресурсам</p>
+        </button>
+        <button type="button" class="category-card" data-category="install" role="listitem" aria-label="Установка программы">
+          <div class="icon-tile icon-tile--teal" aria-hidden="true">⬇️</div>
+          <h3>Установка программы</h3>
+          <p class="text-muted">Запрос на установку или обновление корпоративного ПО</p>
+        </button>
+        <button type="button" class="category-card" data-category="other" role="listitem" aria-label="Другая проблема">
+          <div class="icon-tile" aria-hidden="true">❓</div>
+          <h3>Другая проблема</h3>
+          <p class="text-muted">Если категория не подходит — опишите ситуацию своими словами</p>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p style="max-width: 420px;">IT Navigator — helpdesk, который сначала помогает решить проблему, а затем создаёт готовую заявку для специалиста.</p>
+      <nav class="footer-links" aria-label="Ссылки в подвале">
+        <a href="help.html">Нужна помощь</a>
+        <a href="knowledge-base.html">База знаний</a>
+        <a href="services.html">Услуги</a>
+        <a href="missions.html">Миссии</a>
+        <a href="dashboard.html">IT-панель</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/tickets.js"></script>
+  <script src="../js/profile.js"></script>
+  <script src="../js/diagnostics.js"></script>
+  <script src="../js/missions.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>

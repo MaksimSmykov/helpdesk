@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Список ваших заявок в IT-отдел со статусами и приоритетами." />
+  <title>Мои заявки — IT Navigator</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+<body class="page-shell" data-page="tickets">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="IT Navigator — на главную">
+        <span class="brand-mark" aria-hidden="true">IN</span>
+        <span class="brand-text">IT Navigator</span>
+      </a>
+      <nav class="nav-desktop" aria-label="Основная навигация">
+        <a class="nav-link" data-role-nav="employee it" href="knowledge-base.html">База знаний</a>
+        <a class="nav-link" data-role-nav="employee" href="services.html">Услуги</a>
+        <a class="nav-link" data-role-nav="employee" href="missions.html">Миссии</a>
+        <a class="nav-link" data-role-nav="it" href="tickets.html">Заявки</a>
+        <a class="nav-link" data-role-nav="it" href="dashboard.html">IT-панель</a>
+        <a class="nav-link" data-role-nav="employee it" href="profile.html">Профиль</a>
+      </nav>
+      <div class="header-actions">
+        <select class="role-switch" id="roleSwitch" aria-label="Роль пользователя">
+          <option value="employee">Сотрудник</option>
+          <option value="it">IT-отдел</option>
+        </select>
+        <a class="button button--primary" href="help.html">Нужна помощь</a>
+        <button type="button" class="nav-toggle" aria-label="Меню" aria-expanded="false" aria-controls="navMobile">☰</button>
+      </div>
+    </div>
+    <nav class="nav-mobile container" id="navMobile" aria-label="Мобильная навигация">
+      <a data-role-nav="employee it" href="knowledge-base.html">База знаний</a>
+      <a data-role-nav="employee" href="services.html">Услуги</a>
+      <a data-role-nav="employee" href="missions.html">Миссии</a>
+      <a data-role-nav="it" href="tickets.html">Заявки</a>
+      <a data-role-nav="it" href="dashboard.html">IT-панель</a>
+      <a data-role-nav="employee it" href="profile.html">Профиль</a>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <h1>Мои заявки</h1>
+          <p class="section-lead">Отслеживайте статус обращений и историю решений.</p>
+        </div>
+        <a class="button button--primary" href="help.html">Новая заявка</a>
+      </div>
+
+      <div class="toolbar">
+        <input class="control" type="search" id="ticketSearch" placeholder="Поиск по номеру, теме или описанию" aria-label="Поиск заявок" />
+        <select class="control" id="ticketStatusFilter" aria-label="Фильтр по статусу">
+          <option value="">Все статусы</option>
+          <option value="accepted">Принято</option>
+          <option value="assigned">Назначен специалист</option>
+          <option value="diagnostics">Диагностика</option>
+          <option value="waiting">Ожидается действие</option>
+          <option value="resolved">Решено</option>
+        </select>
+        <select class="control" id="ticketPriorityFilter" aria-label="Фильтр по приоритету">
+          <option value="">Все приоритеты</option>
+          <option value="low">Низкий</option>
+          <option value="medium">Средний</option>
+          <option value="high">Высокий</option>
+          <option value="critical">Критический</option>
+        </select>
+      </div>
+
+      <div id="ticketsList"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p style="max-width: 420px;">IT Navigator — helpdesk, который сначала помогает решить проблему, а затем создаёт готовую заявку для специалиста.</p>
+      <nav class="footer-links" aria-label="Ссылки в подвале">
+        <a href="help.html">Нужна помощь</a>
+        <a href="knowledge-base.html">База знаний</a>
+        <a href="services.html">Услуги</a>
+        <a href="missions.html">Миссии</a>
+        <a href="dashboard.html">IT-панель</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/tickets.js"></script>
+  <script src="../js/profile.js"></script>
+  <script src="../js/diagnostics.js"></script>
+  <script src="../js/missions.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>

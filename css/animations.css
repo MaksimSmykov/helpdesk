@@ -1,0 +1,94 @@
+/* ================================================================
+   Анимации (уважаем prefers-reduced-motion)
+   ================================================================ */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(31, 94, 255, 0.18); }
+  50% { box-shadow: 0 0 0 8px rgba(31, 94, 255, 0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.reveal {
+  animation: fade-up 480ms ease both;
+}
+
+.reveal-delay-1 { animation-delay: 80ms; }
+.reveal-delay-2 { animation-delay: 160ms; }
+.reveal-delay-3 { animation-delay: 240ms; }
+
+.step-panel {
+  animation: fade-up 280ms ease both;
+}
+
+.toast {
+  animation: toast-in 240ms ease both;
+}
+
+.pulse-hint {
+  animation: pulse-soft 2.2s ease infinite;
+}
+
+.is-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.is-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--border), var(--surface), var(--border));
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 260ms ease, opacity 180ms ease, visibility 0s linear 260ms;
+}
+
+.faq-answer > div {
+  overflow: hidden;
+}
+
+.faq-item.is-open .faq-answer {
+  max-height: 260px;
+  opacity: 1;
+  visibility: visible;
+  transition: max-height 260ms ease, opacity 180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

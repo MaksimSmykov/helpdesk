@@ -1,0 +1,52 @@
+/* ================================================================
+   IT Navigator — дизайн-токены
+   ================================================================ */
+:root {
+  color-scheme: light;
+
+  --bg: #f3f6fb;
+  --bg-elevated: #eef3fa;
+  --surface: #ffffff;
+  --surface-soft: #f7f9fc;
+  --surface-accent: #e8f0ff;
+  --surface-teal: #e7f7f5;
+
+  --text: #152033;
+  --text-muted: #5f6b7c;
+  --text-inverse: #ffffff;
+
+  --border: #d9e1ec;
+  --border-strong: #b8c4d6;
+
+  --primary: #1f5eff;
+  --primary-hover: #1648d4;
+  --primary-soft: #e8efff;
+  --teal: #0d9488;
+  --teal-hover: #0b7f75;
+  --teal-soft: #e6f7f5;
+  --graphite: #2b3648;
+
+  --success: #0f7a4c;
+  --success-soft: #e6f7ef;
+  --warning: #a35c00;
+  --warning-soft: #fff4de;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+  --info: #175cd3;
+  --info-soft: #eaf2ff;
+
+  --shadow-sm: 0 4px 14px rgba(21, 32, 51, 0.06);
+  --shadow-md: 0 16px 40px rgba(21, 32, 51, 0.1);
+  --shadow-lg: 0 28px 70px rgba(21, 32, 51, 0.14);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  --container: 1180px;
+  --header-h: 72px;
+  --transition: 180ms ease;
+  --font: "Segoe UI", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Segoe UI Semibold", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+}

@@ -92,6 +92,28 @@
     return mission;
   };
 
+  ITN.missions.addStep = function (missionId, title) {
+    var missions = ITN.missions.getAll();
+    var mission = missions.find(function (m) {
+      return m.id === missionId;
+    });
+
+    if (!mission || !title || !title.trim()) {
+      return null;
+    }
+
+    mission.steps = mission.steps || [];
+    mission.steps.push({
+      id: "custom-" + Date.now(),
+      title: title.trim(),
+      done: false,
+      articleId: "custom"
+    });
+
+    ITN.missions.saveAll(missions);
+    return mission;
+  };
+
   ITN.missions.getProgress = function (missionId) {
     var mission = ITN.missions.getById(missionId);
     if (!mission || !mission.steps.length) {

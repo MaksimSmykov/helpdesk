@@ -469,6 +469,11 @@
       return;
     }
 
+    var initialQuery = getQueryParam("q") || getQueryParam("query");
+    if (searchInput && initialQuery) {
+      searchInput.value = initialQuery;
+    }
+
     function render() {
       var query = searchInput ? searchInput.value.trim().toLowerCase() : "";
       var articles = ITN.KB_ARTICLES.filter(function (article) {
@@ -574,14 +579,23 @@
         var progress = ITN.missions.getProgress(skill.id);
         var doneMark = progress.percent === 100 ? " ✓" : "";
         var doneBadge = progress.percent === 100 ? '<span class="badge badge--done">Готово</span>' : "";
+        var doneCheckbox =
+          '<input type="checkbox" disabled aria-label="Навык завершён" ' +
+          (progress.percent === 100 ? "checked" : "") +
+          " />";
 
         return (
           '<div class="skill-row">' +
-          doneBadge +
-          "<strong>" +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">' +
+          "<label class=\"checkbox-row\" style=\"margin:0;color:var(--text);\"><span>" +
+          doneCheckbox +
+          "</span><strong>" +
           escapeHtml(skill.title) +
           doneMark +
-          '</strong><div class="progress-bar"><span style="width:' +
+          "</strong></label>" +
+          doneBadge +
+          "</div>" +
+          '<div class="progress-bar"><span style="width:' +
           progress.percent +
           '%"></span></div><small>' +
           progress.done +
@@ -670,8 +684,8 @@
         .map(function (step) {
           var kbLink =
             '<a class="button button--ghost button--small" href="' +
-            ITN.nav.resolvePath("pages/knowledge-base.html") +
-            '">Открыть инструкцию</a>';
+            ITN.nav.resolvePath("pages/knowledge-base.html?q=" + encodeURIComponent(step.title)) +
+            '">Инструкция по шагу</a>';
 
           return (
             '<div class="check-item">' +
@@ -685,7 +699,8 @@
             "<span><b>" +
             escapeHtml(step.title) +
             "</b>" +
-            (!step.done ? "<br>" + kbLink : "") +
+            "<br>" +
+            kbLink +
             "</span></div>"
           );
         })
@@ -716,7 +731,12 @@
         "</div>" +
         '<a class="button button--primary button--block" href="' +
         ITN.nav.resolvePath("pages/create-ticket.html?hint=" + encodeURIComponent(mission.ticketHint)) +
-        '">Не получается — создать заявку</a>';
+        '">Не получается — создать заявку</a>' +
+        '<form id="addSkillStepForm" class="stack-sm" style="margin-top:16px;">' +
+        '<label class="field-label" for="customSkillStep">Добавить свой шаг</label>' +
+        '<input class="control" id="customSkillStep" name="customSkillStep" type="text" placeholder="Например: проверить доступ из домашней сети" />' +
+        '<button class="button button--secondary button--block" type="submit">Добавить чекбокс</button>' +
+        "</form>";
 
       sidebar.querySelectorAll("input[type=checkbox][data-mission]").forEach(function (checkbox) {
         checkbox.addEventListener("change", function () {
@@ -724,6 +744,18 @@
           render();
         });
       });
+
+      var addStepForm = sidebar.querySelector("#addSkillStepForm");
+      if (addStepForm) {
+        addStepForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var input = addStepForm.querySelector("#customSkillStep");
+          if (input && input.value.trim()) {
+            ITN.missions.addStep(mission.id, input.value.trim());
+            render();
+          }
+        });
+      }
     }
 
     render();

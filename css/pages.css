@@ -3,6 +3,59 @@
    ================================================================ */
 
 /* --- Landing --- */
+.employee-home {
+  display: grid;
+  gap: 20px;
+}
+
+.employee-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.employee-profile-card {
+  padding: clamp(22px, 4vw, 36px);
+}
+
+.employee-profile-card h1 {
+  max-width: 760px;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+}
+
+.employee-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 20px;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.quick-action-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+}
+
+.quick-action-card p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+
+.employee-overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
 .hero {
   display: block;
   padding: 36px 0 28px;
@@ -404,6 +457,27 @@
   gap: 14px;
 }
 
+.skills-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 18px;
+  align-items: start;
+}
+
+.skill-sidebar {
+  position: sticky;
+  top: calc(var(--header-h) + 18px);
+}
+
+.skill-choice {
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: var(--teal);
+  background: var(--teal-soft);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
 .article-card,
 .service-card,
 .mission-card {
@@ -412,6 +486,8 @@
   flex-direction: column;
   gap: 10px;
   height: 100%;
+  width: 100%;
+  text-align: left;
 }
 
 .article-card p,
@@ -501,6 +577,20 @@
 }
 
 @media (max-width: 960px) {
+  .employee-hero,
+  .employee-overview-grid,
+  .skills-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-sidebar {
+    position: static;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
   .hero,
   .problem-grid,
   .feature-grid,

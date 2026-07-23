@@ -568,6 +568,40 @@
     }).join("");
   }
 
+  function buildEmployeeSkillRows() {
+    return ITN.missions.getAll()
+      .map(function (skill) {
+        var progress = ITN.missions.getProgress(skill.id);
+        var doneMark = progress.percent === 100 ? " ✓" : "";
+        var doneBadge = progress.percent === 100 ? '<span class="badge badge--done">Готово</span>' : "";
+
+        return (
+          '<div class="skill-row">' +
+          doneBadge +
+          "<strong>" +
+          escapeHtml(skill.title) +
+          doneMark +
+          '</strong><div class="progress-bar"><span style="width:' +
+          progress.percent +
+          '%"></span></div><small>' +
+          progress.done +
+          " из " +
+          progress.total +
+          " шагов · " +
+          escapeHtml(skill.choice || "Выбор ещё не указан") +
+          "</small></div>"
+        );
+      })
+      .join("");
+  }
+
+  function bootHome() {
+    var skillsBox = document.getElementById("employeeSkillsOverview");
+    if (skillsBox) {
+      skillsBox.innerHTML = buildEmployeeSkillRows();
+    }
+  }
+
   function bootMissions() {
     var grid = document.getElementById("missionsGrid");
     var sidebar = document.getElementById("skillSidebar");
@@ -703,26 +737,7 @@
     }
 
     var openCount = ITN.profile.getOpenTicketsCount();
-    var skillsHtml = ITN.missions.getAll()
-      .map(function (skill) {
-        var progress = ITN.missions.getProgress(skill.id);
-        var doneMark = progress.percent === 100 ? " ✓" : "";
-        return (
-          '<div class="skill-row"><strong>' +
-          escapeHtml(skill.title) +
-          doneMark +
-          '</strong><div class="progress-bar"><span style="width:' +
-          progress.percent +
-          '%"></span></div><small>' +
-          progress.done +
-          " из " +
-          progress.total +
-          " шагов · " +
-          escapeHtml(skill.choice || "Выбор ещё не указан") +
-          "</small></div>"
-        );
-      })
-      .join("");
+    var skillsHtml = buildEmployeeSkillRows();
 
     var devicesHtml = (profile.devices || [])
       .map(function (device) {
@@ -975,7 +990,7 @@
   }
 
   var pageBootHandlers = {
-    home: function () {},
+    home: bootHome,
     help: bootHelp,
     solution: bootSolution,
     "create-ticket": bootCreateTicket,

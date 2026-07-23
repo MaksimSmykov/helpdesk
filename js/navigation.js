@@ -39,7 +39,7 @@
     var mobileNav = document.querySelector(".nav-mobile");
     var roleSwitch = document.querySelector("#roleSwitch");
     var currentPath = window.location.pathname.replace(/\\/g, "/");
-    var savedRole = localStorage.getItem("itn_user_role") || "employee";
+    var savedRole = "employee";
 
     function applyRole(role) {
       localStorage.setItem("itn_user_role", role);
@@ -59,6 +59,8 @@
     }
 
     applyRole(savedRole);
+    simplifyEmployeeNavigation();
+    ensureProfileShortcut();
 
     if (toggle && mobileNav) {
       toggle.addEventListener("click", function () {
@@ -93,6 +95,45 @@
       }
     });
   };
+
+  function simplifyEmployeeNavigation() {
+    document.querySelectorAll('a[href$="dashboard.html"], a[href$="tickets.html"], a[href$="services.html"], a[href$="profile.html"]').forEach(function (link) {
+      if (!link.classList.contains("profile-icon-link")) {
+        link.classList.add("hidden");
+      }
+    });
+
+    document.querySelectorAll('a[href$="missions.html"]').forEach(function (link) {
+      link.textContent = "Навыки";
+    });
+  }
+
+  function ensureProfileShortcut() {
+    var actions = document.querySelector(".header-actions");
+    if (!actions || actions.querySelector(".profile-icon-link")) {
+      return;
+    }
+
+    var profile = ITN.profile && ITN.profile.get ? ITN.profile.get() : null;
+    var initials = "П";
+    if (profile && profile.name) {
+      initials = profile.name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(function (part) {
+          return part.charAt(0).toUpperCase();
+        })
+        .join("");
+    }
+
+    var link = document.createElement("a");
+    link.className = "profile-icon-link";
+    link.href = ITN.nav.resolvePath("pages/profile.html");
+    link.textContent = initials;
+    link.setAttribute("aria-label", "Открыть профиль сотрудника");
+    actions.appendChild(link);
+  }
 
   ITN.nav.showToast = function (message, type) {
     type = type || "info";

@@ -15,10 +15,28 @@
   };
 
   ITN.profile.ensureSeed = function () {
-    if (!ITN.profile.get()) {
+    var savedProfile = ITN.profile.get();
+    if (!savedProfile) {
       ITN.profile.save(JSON.parse(JSON.stringify(ITN.DEMO_PROFILE)));
+      return;
     }
+
+    ITN.profile.save(mergeProfile(JSON.parse(JSON.stringify(ITN.DEMO_PROFILE)), savedProfile));
   };
+
+  function mergeProfile(defaultProfile, savedProfile) {
+    var merged = Object.assign({}, defaultProfile, savedProfile);
+    merged.devices = savedProfile.devices && savedProfile.devices.length ? savedProfile.devices : defaultProfile.devices;
+    merged.services = savedProfile.services && savedProfile.services.length ? savedProfile.services : defaultProfile.services;
+    merged.resolvedProblems = savedProfile.resolvedProblems && savedProfile.resolvedProblems.length
+      ? savedProfile.resolvedProblems
+      : defaultProfile.resolvedProblems;
+    merged.skills = savedProfile.skills && savedProfile.skills.length ? savedProfile.skills : defaultProfile.skills;
+    merged.achievements = savedProfile.achievements && savedProfile.achievements.length
+      ? savedProfile.achievements
+      : defaultProfile.achievements;
+    return merged;
+  }
 
   ITN.profile.addResolvedProblem = function (title) {
     var profile = ITN.profile.get();

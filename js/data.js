@@ -1006,50 +1006,54 @@
   ITN.MISSIONS = [
     {
       id: "mission-2fa",
-      title: "Подключить двухфакторную авторизацию",
-      description: "Защитите учётную запись — включите 2FA через корпоративный портал безопасности.",
+      title: "Безопасный вход с 2FA",
+      description: "Навык помогает входить в корпоративные сервисы с двухфакторной защитой и резервными кодами.",
+      choice: "Выбрано приложение Microsoft Authenticator",
       ticketHint: "Не получается настроить 2FA — код не принимается",
       steps: [
-        { id: "s1", title: "Открыть portal.company.ru/security", done: false },
-        { id: "s2", title: "Установить Microsoft Authenticator", done: false },
-        { id: "s3", title: "Привязать аккаунт по QR-коду", done: false },
-        { id: "s4", title: "Сохранить резервные коды", done: false }
+        { id: "s1", title: "Открыть portal.company.ru/security", done: true, articleId: "kb-2fa" },
+        { id: "s2", title: "Установить Microsoft Authenticator", done: true, articleId: "kb-2fa" },
+        { id: "s3", title: "Привязать аккаунт по QR-коду", done: false, articleId: "kb-2fa" },
+        { id: "s4", title: "Сохранить резервные коды", done: false, articleId: "kb-2fa" }
       ]
     },
     {
       id: "mission-vpn",
-      title: "Настроить VPN для удалённой работы",
-      description: "Установите VPN-клиент и проверьте доступ к внутренним ресурсам.",
+      title: "Удалённый доступ через VPN",
+      description: "Навык фиксирует, что сотрудник умеет подключаться к корпоративной сети из дома или командировки.",
+      choice: "Выбран основной шлюз vpn1.company.ru",
       ticketHint: "VPN не подключается после настройки",
       steps: [
-        { id: "s1", title: "Скачать VPN-клиент с портала", done: false },
-        { id: "s2", title: "Импортировать профиль company-vpn", done: false },
-        { id: "s3", title: "Подключиться к vpn1.company.ru", done: false },
-        { id: "s4", title: "Проверить доступ к intranet", done: false }
+        { id: "s1", title: "Скачать VPN-клиент с портала", done: true, articleId: "kb-vpn" },
+        { id: "s2", title: "Импортировать профиль company-vpn", done: true, articleId: "kb-vpn" },
+        { id: "s3", title: "Подключиться к vpn1.company.ru", done: true, articleId: "kb-vpn" },
+        { id: "s4", title: "Проверить доступ к intranet", done: false, articleId: "kb-vpn" }
       ]
     },
     {
       id: "mission-browser",
-      title: "Обновить браузер до актуальной версии",
-      description: "Актуальный браузер обеспечивает безопасность и совместимость с корпоративными сервисами.",
+      title: "Актуальный браузер",
+      description: "Навык помогает поддерживать браузер в безопасной версии для CRM, портала и видеосвязи.",
+      choice: "Выбран корпоративный Microsoft Edge",
       ticketHint: "После обновления браузера не открывается портал",
       steps: [
-        { id: "s1", title: "Открыть настройки браузера", done: false },
-        { id: "s2", title: "Проверить наличие обновлений", done: false },
-        { id: "s3", title: "Установить обновление и перезапустить", done: false },
-        { id: "s4", title: "Проверить вход на portal.company.ru", done: false }
+        { id: "s1", title: "Открыть настройки браузера", done: true, articleId: "kb-browser-update" },
+        { id: "s2", title: "Проверить наличие обновлений", done: true, articleId: "kb-browser-update" },
+        { id: "s3", title: "Установить обновление и перезапустить", done: true, articleId: "kb-browser-update" },
+        { id: "s4", title: "Проверить вход на portal.company.ru", done: true, articleId: "kb-browser-update" }
       ]
     },
     {
       id: "mission-mail",
-      title: "Проверить корпоративную почту",
-      description: "Убедитесь, что почта работает на всех устройствах и настроена подпись.",
+      title: "Корпоративная почта",
+      description: "Навык показывает, что почта настроена на рабочем ноутбуке и телефоне, а подпись соответствует стандарту.",
+      choice: "Почтовый клиент: Outlook на ноутбуке и iPhone",
       ticketHint: "Почта не синхронизируется на телефоне",
       steps: [
-        { id: "s1", title: "Войти в Outlook Web", done: false },
-        { id: "s2", title: "Проверить правила и подпись", done: false },
-        { id: "s3", title: "Настроить почту на телефоне", done: false },
-        { id: "s4", title: "Отправить тестовое письмо себе", done: false }
+        { id: "s1", title: "Войти в Outlook Web", done: true, articleId: "kb-mail-signature" },
+        { id: "s2", title: "Проверить правила и подпись", done: true, articleId: "kb-mail-signature" },
+        { id: "s3", title: "Настроить почту на телефоне", done: false, articleId: "kb-mail-mobile" },
+        { id: "s4", title: "Отправить тестовое письмо себе", done: false, articleId: "kb-mail-mobile" }
       ]
     }
   ];
@@ -1176,12 +1180,21 @@
   ITN.DEMO_PROFILE = {
     id: "user-1",
     name: "Иван Петров",
+    position: "Менеджер по работе с корпоративными клиентами",
     department: "Отдел продаж",
+    location: "Москва, офис «Север», 3 этаж",
+    workplace: "Рабочее место S-314",
+    manager: "Ольга Сергеева",
     email: "i.petrov@company.ru",
     phone: "+7 (495) 123-45-67",
+    internalPhone: "3145",
+    laptop: "Lenovo ThinkPad T14 Gen 3",
+    connectedDevice: "Док-станция Lenovo USB-C Dock — MON-27-014 / MON-27-015",
+    networkProfile: "Corp-WiFi / VPN: vpn1.company.ru",
     devices: [
-      { id: "dev-1", name: "Lenovo ThinkPad T14", inventory: "INV-45821", status: "В работе" },
-      { id: "dev-2", name: "iPhone 14", inventory: "INV-45822", status: "Корпоративный" }
+      { id: "dev-1", name: "Lenovo ThinkPad T14 Gen 3", inventory: "INV-45821", status: "В работе", os: "Windows 11 Pro", owner: "Иван Петров" },
+      { id: "dev-2", name: "iPhone 14", inventory: "INV-45822", status: "Корпоративный", os: "iOS 18", owner: "Иван Петров" },
+      { id: "dev-3", name: "Док-станция Lenovo USB-C Dock", inventory: "INV-45823", status: "Подключена", os: "Firmware 3.1", owner: "Рабочее место S-314" }
     ],
     services: ["Корпоративная почта", "CRM", "VPN", "Teams", "SharePoint"],
     resolvedProblems: [

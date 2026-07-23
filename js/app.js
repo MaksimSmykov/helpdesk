@@ -570,33 +570,29 @@
 
   function bootMissions() {
     var grid = document.getElementById("missionsGrid");
+    var sidebar = document.getElementById("skillSidebar");
     if (!grid) {
       return;
     }
 
+    var selectedMissionId = null;
+
     function render() {
       var missions = ITN.missions.getAll();
+      if (!selectedMissionId && missions[0]) {
+        selectedMissionId = missions[0].id;
+      }
+
       grid.innerHTML = missions
         .map(function (mission) {
           var progress = ITN.missions.getProgress(mission.id);
-          var stepsHtml = mission.steps
-            .map(function (step) {
-              return (
-                '<label class="check-item"><input type="checkbox" data-mission="' +
-                mission.id +
-                '" data-step="' +
-                step.id +
-                '"' +
-                (step.done ? " checked" : "") +
-                "><span>" +
-                escapeHtml(step.title) +
-                "</span></label>"
-              );
-            })
-            .join("");
 
           return (
-            '<article class="card mission-card">' +
+            '<button type="button" class="card mission-card card--hover" data-open-skill="' +
+            mission.id +
+            '" aria-pressed="' +
+            (selectedMissionId === mission.id ? "true" : "false") +
+            '">' +
             "<h3>" +
             escapeHtml(mission.title) +
             "</h3>" +
@@ -611,18 +607,82 @@
             " / " +
             progress.total +
             " шагов</small>" +
-            '<div class="check-list">' +
-            stepsHtml +
+            '<div class="skill-choice">' +
+            escapeHtml(mission.choice || "Выбор ещё не указан") +
             "</div>" +
-            '<a class="button button--ghost" href="' +
-            ITN.nav.resolvePath("pages/create-ticket.html?hint=" + encodeURIComponent(mission.ticketHint)) +
-            '">Возникла проблема</a>' +
-            "</article>"
+            "</button>"
           );
         })
         .join("");
 
-      grid.querySelectorAll("input[type=checkbox][data-mission]").forEach(function (checkbox) {
+      grid.querySelectorAll("[data-open-skill]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          selectedMissionId = button.getAttribute("data-open-skill");
+          render();
+        });
+      });
+
+      renderSidebar(selectedMissionId);
+    }
+
+    function renderSidebar(missionId) {
+      var mission = ITN.missions.getById(missionId);
+      if (!sidebar || !mission) return;
+
+      var progress = ITN.missions.getProgress(mission.id);
+      var stepsHtml = mission.steps
+        .map(function (step) {
+          var kbLink =
+            '<a class="button button--ghost button--small" href="' +
+            ITN.nav.resolvePath("pages/knowledge-base.html") +
+            '">Открыть инструкцию</a>';
+
+          return (
+            '<div class="check-item">' +
+            '<input type="checkbox" data-mission="' +
+            mission.id +
+            '" data-step="' +
+            step.id +
+            '"' +
+            (step.done ? " checked" : "") +
+            " />" +
+            "<span><b>" +
+            escapeHtml(step.title) +
+            "</b>" +
+            (!step.done ? "<br>" + kbLink : "") +
+            "</span></div>"
+          );
+        })
+        .join("");
+
+      sidebar.innerHTML =
+        "<h2>" +
+        escapeHtml(mission.title) +
+        "</h2>" +
+        '<p class="text-muted" style="margin-top:8px;">' +
+        escapeHtml(mission.description) +
+        "</p>" +
+        '<div class="skill-choice" style="margin-top:14px;">' +
+        escapeHtml(mission.choice || "Выбор ещё не указан") +
+        "</div>" +
+        '<div class="progress-bar" style="margin-top:16px;"><span style="width:' +
+        progress.percent +
+        '%"></span></div>' +
+        '<p class="text-muted" style="margin-top:8px;">Прогресс: ' +
+        progress.done +
+        " из " +
+        progress.total +
+        " шагов (" +
+        progress.percent +
+        "%)</p>" +
+        '<div class="check-list">' +
+        stepsHtml +
+        "</div>" +
+        '<a class="button button--primary button--block" href="' +
+        ITN.nav.resolvePath("pages/create-ticket.html?hint=" + encodeURIComponent(mission.ticketHint)) +
+        '">Не получается — создать заявку</a>';
+
+      sidebar.querySelectorAll("input[type=checkbox][data-mission]").forEach(function (checkbox) {
         checkbox.addEventListener("change", function () {
           ITN.missions.toggleStep(checkbox.getAttribute("data-mission"), checkbox.getAttribute("data-step"));
           render();
@@ -663,6 +723,7 @@
           escapeHtml(device.inventory) +
           " · " +
           escapeHtml(device.status) +
+          (device.os ? " · " + escapeHtml(device.os) : "") +
           "</small></div>"
         );
       })
@@ -698,10 +759,34 @@
       escapeHtml(profile.name) +
       "</h2>" +
       '<p class="text-muted">' +
+      escapeHtml(profile.position || "Сотрудник") +
+      " · " +
       escapeHtml(profile.department) +
       " · " +
       escapeHtml(profile.email) +
       "</p>" +
+      '<div class="detail-grid" style="margin-top:16px;">' +
+      '<div class="detail-item"><span>Телефон</span><b>' +
+      escapeHtml(profile.phone || "Не указан") +
+      "</b></div>" +
+      '<div class="detail-item"><span>Внутренний номер</span><b>' +
+      escapeHtml(profile.internalPhone || "Не указан") +
+      "</b></div>" +
+      '<div class="detail-item"><span>Рабочее место</span><b>' +
+      escapeHtml(profile.workplace || "Не указано") +
+      "</b></div>" +
+      '<div class="detail-item"><span>Руководитель</span><b>' +
+      escapeHtml(profile.manager || "Не указан") +
+      "</b></div>" +
+      '<div class="detail-item detail-item--full"><span>Ноутбук</span><b>' +
+      escapeHtml(profile.laptop || "Не указан") +
+      "</b></div>" +
+      '<div class="detail-item detail-item--full"><span>Подключённое устройство</span><b>' +
+      escapeHtml(profile.connectedDevice || "Не указано") +
+      "</b></div>" +
+      '<div class="detail-item detail-item--full"><span>Сеть</span><b>' +
+      escapeHtml(profile.networkProfile || "Не указана") +
+      "</b></div></div>" +
       '<p style="margin-top:10px;"><strong>Открытых заявок:</strong> ' +
       openCount +
       "</p>" +

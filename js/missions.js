@@ -18,8 +18,35 @@
     var missions = ITN.missions.getAll();
     if (!missions.length) {
       ITN.missions.saveAll(JSON.parse(JSON.stringify(ITN.MISSIONS)));
+      return;
     }
+
+    ITN.missions.saveAll(mergeMissionDefaults(JSON.parse(JSON.stringify(ITN.MISSIONS)), missions));
   };
+
+  function mergeMissionDefaults(defaultMissions, savedMissions) {
+    return defaultMissions.map(function (defaultMission) {
+      var savedMission = savedMissions.find(function (mission) {
+        return mission.id === defaultMission.id;
+      });
+
+      if (!savedMission) {
+        return defaultMission;
+      }
+
+      defaultMission.steps = defaultMission.steps.map(function (defaultStep) {
+        var savedStep = (savedMission.steps || []).find(function (step) {
+          return step.id === defaultStep.id;
+        });
+        return savedStep ? Object.assign({}, defaultStep, { done: Boolean(savedStep.done) }) : defaultStep;
+      });
+
+      return Object.assign({}, defaultMission, {
+        choice: savedMission.choice || defaultMission.choice,
+        steps: defaultMission.steps
+      });
+    });
+  }
 
   ITN.missions.getById = function (missionId) {
     return ITN.missions.getAll().find(function (m) {

@@ -34,6 +34,14 @@
         return defaultMission;
       }
 
+      var isLegacyMission = !savedMission.choice || !(savedMission.steps || []).some(function (step) {
+        return step.articleId;
+      });
+
+      if (isLegacyMission) {
+        return defaultMission;
+      }
+
       defaultMission.steps = defaultMission.steps.map(function (defaultStep) {
         var savedStep = (savedMission.steps || []).find(function (step) {
           return step.id === defaultStep.id;

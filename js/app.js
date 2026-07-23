@@ -586,6 +586,7 @@
       grid.innerHTML = missions
         .map(function (mission) {
           var progress = ITN.missions.getProgress(mission.id);
+          var doneMark = progress.percent === 100 ? '<span class="badge badge--done">Готово</span>' : "";
 
           return (
             '<button type="button" class="card mission-card card--hover" data-open-skill="' +
@@ -593,6 +594,7 @@
             '" aria-pressed="' +
             (selectedMissionId === mission.id ? "true" : "false") +
             '">' +
+            doneMark +
             "<h3>" +
             escapeHtml(mission.title) +
             "</h3>" +
@@ -701,15 +703,23 @@
     }
 
     var openCount = ITN.profile.getOpenTicketsCount();
-    var skillsHtml = (profile.skills || [])
+    var skillsHtml = ITN.missions.getAll()
       .map(function (skill) {
-        var pct = Math.round(((skill.level || 0) / (skill.maxLevel || 5)) * 100);
+        var progress = ITN.missions.getProgress(skill.id);
+        var doneMark = progress.percent === 100 ? " ✓" : "";
         return (
           '<div class="skill-row"><strong>' +
-          escapeHtml(skill.name) +
+          escapeHtml(skill.title) +
+          doneMark +
           '</strong><div class="progress-bar"><span style="width:' +
-          pct +
-          '%"></span></div></div>'
+          progress.percent +
+          '%"></span></div><small>' +
+          progress.done +
+          " из " +
+          progress.total +
+          " шагов · " +
+          escapeHtml(skill.choice || "Выбор ещё не указан") +
+          "</small></div>"
         );
       })
       .join("");

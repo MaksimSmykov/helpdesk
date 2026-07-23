@@ -50,40 +50,12 @@
       <div class="section-heading">
         <div>
           <h1>Детали заявки</h1>
-          <p class="section-lead">Информация по заявке, история изменений и панель управления для специалиста.</p>
+          <p class="section-lead">Информация по заявке и история изменений.</p>
         </div>
         <a class="button button--secondary" href="tickets.html">← К списку заявок</a>
       </div>
 
       <div id="ticketDetail"></div>
-
-      <div class="card card-pad" style="margin-top: 20px;">
-        <h3>Панель специалиста</h3>
-        <p class="text-muted" style="margin: 8px 0 18px;">Назначение исполнителя и изменение статуса заявки (демо-режим, без авторизации).</p>
-        <div class="form-grid">
-          <form id="ticketAssignForm" class="field">
-            <label class="field-label" for="assignSpecialist">Назначить специалиста</label>
-            <select class="control" id="assignSpecialist" name="assignSpecialist">
-              <option value="spec-1">Алексей Воронов — Системный администратор</option>
-              <option value="spec-2">Мария Кузнецова — Инженер поддержки</option>
-              <option value="spec-3">Дмитрий Соколов — Специалист по сетям и VPN</option>
-              <option value="spec-4">Елена Морозова — Аналитик IT-сервисов</option>
-            </select>
-            <button type="submit" class="button button--secondary" style="margin-top: 12px;">Назначить</button>
-          </form>
-          <form id="ticketStatusForm" class="field">
-            <label class="field-label" for="ticketStatus">Изменить статус</label>
-            <select class="control" id="ticketStatus" name="ticketStatus">
-              <option value="accepted">Принято</option>
-              <option value="assigned">Назначен специалист</option>
-              <option value="diagnostics">Диагностика</option>
-              <option value="waiting">Ожидается действие</option>
-              <option value="resolved">Решено</option>
-            </select>
-            <button type="submit" class="button button--primary" style="margin-top: 12px;">Обновить статус</button>
-          </form>
-        </div>
-      </div>
     </div>
   </main>
 

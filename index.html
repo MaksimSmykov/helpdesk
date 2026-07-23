@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="IT Navigator — helpdesk, который сначала помогает сотруднику решить проблему самостоятельно, а затем создаёт готовую заявку для IT-специалиста." />
-  <title>IT Navigator — helpdesk, который сначала помогает</title>
+  <meta name="description" content="IT Navigator — личный кабинет сотрудника для решения IT-вопросов, заявок, базы знаний и цифровых навыков." />
+  <title>Кабинет сотрудника — IT Navigator</title>
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/components.css" />
@@ -14,15 +14,13 @@
 <body class="page-shell" data-page="home">
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="IT Navigator — на главную">
+      <a class="brand" href="index.html" aria-label="IT Navigator — кабинет сотрудника">
         <span class="brand-mark" aria-hidden="true">IN</span>
         <span class="brand-text">IT Navigator</span>
       </a>
       <nav class="nav-desktop" aria-label="Основная навигация">
-        <a class="nav-link" href="#how">Как работает</a>
         <a class="nav-link" href="pages/knowledge-base.html">База знаний</a>
-        <a class="nav-link" href="#pricing">Тарифы</a>
-        <a class="nav-link" href="#faq">FAQ</a>
+        <a class="nav-link" href="pages/missions.html">Навыки</a>
       </nav>
       <div class="header-actions">
         <a class="button button--primary" href="pages/help.html">Нужна помощь</a>
@@ -30,274 +28,127 @@
       </div>
     </div>
     <nav class="nav-mobile container" id="navMobile" aria-label="Мобильная навигация">
-      <a href="#how">Как работает</a>
       <a href="pages/knowledge-base.html">База знаний</a>
-      <a href="#pricing">Тарифы</a>
-      <a href="#faq">FAQ</a>
+      <a href="pages/missions.html">Навыки</a>
     </nav>
   </header>
 
-  <main class="page-main page-main--landing">
-    <div class="container">
-      <section class="hero">
-        <div class="card hero-copy reveal">
-          <span class="hero-eyebrow">IT Navigator</span>
-          <h1>Helpdesk, который помогает решить проблему и создаёт готовую заявку.</h1>
-          <p class="lead">Сотрудник проходит короткую диагностику, получает проверенные шаги и часто решает вопрос сам. Если не помогло — IT получает заявку уже с ответами, проверками и предполагаемой причиной.</p>
-          <div class="hero-cta">
-            <a class="button button--primary" href="pages/help.html">Нужна помощь</a>
-            <a class="button button--secondary" href="#how">Смотреть как работает</a>
+  <main class="page-main">
+    <div class="container employee-home">
+      <section class="employee-hero">
+        <article class="card employee-profile-card">
+          <span class="hero-eyebrow">Профиль сотрудника</span>
+          <h1>Иван Петров</h1>
+          <p class="lead">Менеджер по работе с корпоративными клиентами, Отдел продаж</p>
+          <div class="employee-meta">
+            <span class="badge badge--teal">Москва, офис «Север»</span>
+            <span class="badge badge--assigned">Рабочее место S-314</span>
+            <span class="badge badge--medium">Внутренний номер 3145</span>
           </div>
-          <div class="hero-points">
-            <span class="hero-point">Диагностика вместо формы</span>
-            <span class="hero-point">Заявка с готовым контекстом</span>
-            <span class="hero-point">База знаний и IT-миссии</span>
+
+          <div class="detail-grid">
+            <div class="detail-item"><span>Email</span><b>i.petrov@company.ru</b></div>
+            <div class="detail-item"><span>Телефон</span><b>+7 (495) 123-45-67</b></div>
+            <div class="detail-item"><span>Ноутбук</span><b>Lenovo ThinkPad T14 Gen 3</b></div>
+            <div class="detail-item"><span>Подключено</span><b>Док-станция Lenovo USB-C Dock</b></div>
+            <div class="detail-item detail-item--full"><span>Сеть</span><b>Corp-WiFi / VPN: vpn1.company.ru</b></div>
           </div>
-          <div class="card hero-visual reveal reveal-delay-1">
+        </article>
+
+        <aside class="card card-pad">
+          <h2>Быстрые действия</h2>
+          <p class="text-muted" style="margin-top: 8px;">Начните с проверки проблемы или сразу создайте обращение, если нужно участие специалиста.</p>
+          <div class="quick-actions-grid" style="margin-top: 18px;">
+            <a class="card quick-action-card card--hover" href="pages/help.html">
+              <span class="icon-tile" aria-hidden="true">?</span>
+              <span><b>Проверить проблему</b><p>Диагностика подскажет первые шаги.</p></span>
+            </a>
+            <a class="card quick-action-card card--hover" href="pages/create-ticket.html">
+              <span class="icon-tile icon-tile--teal" aria-hidden="true">+</span>
+              <span><b>Оставить заявку</b><p>Если вопрос нужно передать IT.</p></span>
+            </a>
+            <a class="card quick-action-card card--hover" href="pages/knowledge-base.html">
+              <span class="icon-tile" aria-hidden="true">i</span>
+              <span><b>База знаний</b><p>Инструкции по частым вопросам.</p></span>
+            </a>
+            <a class="card quick-action-card card--hover" href="pages/tickets.html">
+              <span class="icon-tile icon-tile--teal" aria-hidden="true">#</span>
+              <span><b>История обращений</b><p>Статусы и прошлые решения.</p></span>
+            </a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="employee-overview-grid">
+        <article class="card card-pad">
+          <div class="section-heading" style="margin-bottom: 14px;">
             <div>
-              <span class="hero-eyebrow" style="background: rgba(255,255,255,.16); color: #fff;">Маршрут диагностики</span>
-              <div class="route-demo">
-                <div class="route-demo-item"><strong>1.</strong>&nbsp;Категория проблемы</div>
-                <div class="route-demo-item"><strong>2.</strong>&nbsp;Уточняющие вопросы</div>
-                <div class="route-demo-item"><strong>3.</strong>&nbsp;Проверочные шаги</div>
-                <div class="route-demo-item"><strong>4.</strong>&nbsp;Решение или заявка</div>
-              </div>
+              <h2>Мои устройства</h2>
+              <p>Устройства, закреплённые за сотрудником и рабочим местом.</p>
             </div>
-            <p style="margin-top: 0; opacity: .85; font-size: .85rem;">Демо-сценарий занимает меньше 3 минут.</p>
           </div>
-        </div>
+          <div class="device-list">
+            <div class="device-row"><strong>Lenovo ThinkPad T14 Gen 3</strong><br><small>INV-45821 · Windows 11 Pro · В работе</small></div>
+            <div class="device-row"><strong>iPhone 14</strong><br><small>INV-45822 · iOS 18 · Корпоративный</small></div>
+            <div class="device-row"><strong>Lenovo USB-C Dock</strong><br><small>INV-45823 · подключена к MON-27-014 / MON-27-015</small></div>
+          </div>
+        </article>
+
+        <article class="card card-pad">
+          <div class="section-heading" style="margin-bottom: 14px;">
+            <div>
+              <h2>Открытые обращения</h2>
+              <p>Последние заявки, которые ещё находятся в работе.</p>
+            </div>
+          </div>
+          <div class="history-list">
+            <a class="history-item" href="pages/ticket.html?id=TKT-2026-0142"><strong>TKT-2026-0142 · CRM не принимает пароль</strong><br><small>Диагностика · Мария Кузнецова</small></a>
+            <a class="history-item" href="pages/ticket.html?id=TKT-2026-0138"><strong>TKT-2026-0138 · VPN обрывается</strong><br><small>Ожидается действие · Дмитрий Соколов</small></a>
+          </div>
+        </article>
       </section>
 
-      <section class="landing-section" id="how">
-        <div class="section-heading">
-          <div>
-            <h2>Как работает IT Navigator</h2>
-            <p class="section-lead">Четыре шага — от выбора категории до готовой заявки с полным контекстом, если самостоятельно решить не получилось.</p>
+      <section class="employee-overview-grid">
+        <article class="card card-pad">
+          <div class="section-heading" style="margin-bottom: 14px;">
+            <div>
+              <h2>Навыки сотрудника</h2>
+              <p>Цифровая самостоятельность: что уже настроено и что осталось пройти.</p>
+            </div>
+            <a class="button button--secondary button--small" href="pages/missions.html">Открыть навыки</a>
           </div>
-        </div>
-        <div class="steps-row">
-          <div class="card step-card reveal">
-            <span class="step-num">1</span>
-            <h3>Опишите проблему</h3>
-            <p>Выберите одну из категорий — вход, сеть, устройство, программа, доступ, установка ПО или другое.</p>
+          <div class="skill-list">
+            <div class="skill-row"><strong>Удалённый доступ через VPN</strong><div class="progress-bar"><span style="width:75%"></span></div><small>Выбран основной шлюз vpn1.company.ru</small></div>
+            <div class="skill-row"><strong>Безопасный вход с 2FA</strong><div class="progress-bar"><span style="width:50%"></span></div><small>Выбрано приложение Microsoft Authenticator</small></div>
+            <div class="skill-row"><strong>Корпоративная почта</strong><div class="progress-bar"><span style="width:50%"></span></div><small>Outlook на ноутбуке и iPhone</small></div>
           </div>
-          <div class="card step-card reveal reveal-delay-1">
-            <span class="step-num">2</span>
-            <h3>Пройдите проверку</h3>
-            <p>Система задаёт уточняющие вопросы и предлагает конкретные шаги self-service диагностики.</p>
-          </div>
-          <div class="card step-card reveal reveal-delay-2">
-            <span class="step-num">3</span>
-            <h3>Получите решение</h3>
-            <p>Если шаги помогли — проблема закрыта без специалиста, а результат сохраняется в профиле.</p>
-          </div>
-          <div class="card step-card reveal reveal-delay-3">
-            <span class="step-num">4</span>
-            <h3>Создайте заявку</h3>
-            <p>Если не помогло — заявка формируется автоматически с историей диагностики и уходит специалисту.</p>
-          </div>
-        </div>
-      </section>
+        </article>
 
-      <section class="landing-section">
-        <div class="section-heading">
-          <div>
-            <h2>Что получает сотрудник</h2>
-            <p class="section-lead">Меньше ожидания, больше самостоятельности — и всегда понятно, что происходит с обращением.</p>
+        <article class="card card-pad">
+          <div class="section-heading" style="margin-bottom: 14px;">
+            <div>
+              <h2>Полезные статьи</h2>
+              <p>Материалы, которые чаще всего помогают сотрудникам отдела продаж.</p>
+            </div>
           </div>
-        </div>
-        <div class="feature-grid">
-          <div class="card card-pad feature-card">
-            <div class="icon-tile" aria-hidden="true">⚡</div>
-            <h3>Мгновенная диагностика</h3>
-            <p>Не нужно ждать специалиста, чтобы узнать первые шаги — система подсказывает их сразу.</p>
+          <div class="history-list">
+            <a class="history-item" href="pages/knowledge-base.html"><strong>Как подключиться к VPN из дома</strong><br><small>Сеть и удалённый доступ</small></a>
+            <a class="history-item" href="pages/knowledge-base.html"><strong>Что делать, если не приходит код 2FA</strong><br><small>Безопасный вход</small></a>
+            <a class="history-item" href="pages/knowledge-base.html"><strong>Настройка подписи и почты на телефоне</strong><br><small>Корпоративная почта</small></a>
           </div>
-          <div class="card card-pad feature-card">
-            <div class="icon-tile icon-tile--teal" aria-hidden="true">📊</div>
-            <h3>Прозрачный статус заявки</h3>
-            <p>Видно, на каком этапе заявка — от «Принято» до «Решено» — и кто из специалистов ей занимается.</p>
-          </div>
-          <div class="card card-pad feature-card">
-            <div class="icon-tile" aria-hidden="true">🎯</div>
-            <h3>IT-миссии и навыки</h3>
-            <p>Пошаговые задания помогают уверенно освоить VPN, 2FA и другие цифровые инструменты компании.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="landing-section">
-        <div class="section-heading">
-          <div>
-            <h2>Что получает IT-отдел</h2>
-            <p class="section-lead">Меньше рутинных обращений — больше времени на сложные задачи и системные улучшения.</p>
-          </div>
-        </div>
-        <div class="feature-grid">
-          <div class="card card-pad feature-card">
-            <div class="icon-tile icon-tile--teal" aria-hidden="true">🧭</div>
-            <h3>Заявки с готовым контекстом</h3>
-            <p>Каждая эскалированная заявка приходит с ответами пользователя, выполненными проверками и предполагаемой причиной.</p>
-          </div>
-          <div class="card card-pad feature-card">
-            <div class="icon-tile" aria-hidden="true">📈</div>
-            <h3>IT-панель с аналитикой</h3>
-            <p>Нагрузка специалистов, повторяющиеся проблемы и соблюдение SLA — в одном месте, без ручных отчётов.</p>
-          </div>
-          <div class="card card-pad feature-card">
-            <div class="icon-tile icon-tile--teal" aria-hidden="true">🛡️</div>
-            <h3>Меньше типовых обращений</h3>
-            <p>Самостоятельная диагностика закрывает часть заявок ещё до попадания в очередь специалистов.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="landing-section">
-        <div class="section-heading">
-          <div>
-            <h2>Пример маршрута диагностики</h2>
-            <p class="section-lead">Так выглядит путь сотрудника с проблемой «Не подключается VPN» — от вопроса до готового решения.</p>
-          </div>
-        </div>
-        <div class="card card-pad">
-          <div class="route-progress" aria-hidden="true">
-            <div class="route-step is-done">1. Проблема</div>
-            <div class="route-step is-done">2. Проверка</div>
-            <div class="route-step is-current">3. Решение</div>
-            <div class="route-step">4. Заявка</div>
-          </div>
-          <div class="check-list">
-            <div class="check-item"><span>✓</span><span>Категория «Интернет или VPN» → «Не подключается VPN» → «Таймаут подключения»</span></div>
-            <div class="check-item"><span>✓</span><span>Проверка: отключён сторонний антивирус, порт UDP 4500 не заблокирован, подключение к резервному шлюзу vpn2.company.ru</span></div>
-            <div class="check-item"><span>💡</span><span>Решение: подключение установлено через резервный шлюз — специалист не понадобился</span></div>
-          </div>
-        </div>
-      </section>
-
-
-      <section class="landing-section">
-        <div class="section-heading">
-          <div>
-            <h2>Экономия времени в цифрах</h2>
-            <p class="section-lead">Данные по компаниям, внедрившим самостоятельную диагностику перед созданием заявки.</p>
-          </div>
-        </div>
-        <div class="metrics-grid">
-          <div class="card metric-card"><strong>40%</strong><span>Меньше повторных обращений по типовым проблемам</span></div>
-          <div class="card metric-card"><strong>2.5ч</strong><span>Среднее время, сэкономленное на одну решённую заявку</span></div>
-          <div class="card metric-card"><strong>156</strong><span>Проблем предотвращено самостоятельно за последний месяц</span></div>
-          <div class="card metric-card"><strong>94%</strong><span>Заявок закрыто в рамках SLA</span></div>
-        </div>
-      </section>
-
-      <section class="landing-section" id="pricing">
-        <div class="section-heading">
-          <div>
-            <h2>Тарифы для внедрения в компании</h2>
-            <p class="section-lead">Выберите план в зависимости от размера компании и количества обращений в IT-отдел.</p>
-          </div>
-        </div>
-        <div class="pricing-grid">
-          <div class="card price-card">
-            <h3>Старт</h3>
-            <p class="text-muted">До 100 сотрудников</p>
-            <div class="price">от 15 000 ₽/мес</div>
-            <ul>
-              <li>Диагностика по 7 категориям</li>
-              <li>База знаний до 50 статей</li>
-              <li>1 очередь заявок</li>
-              <li>Поддержка по email</li>
-            </ul>
-            <a class="button button--secondary button--block" href="pages/services.html">Оставить заявку</a>
-          </div>
-          <div class="card price-card is-featured">
-            <h3>Стандарт</h3>
-            <p class="text-muted">До 500 сотрудников</p>
-            <div class="price">от 42 000 ₽/мес</div>
-            <ul>
-              <li>Все категории и IT-миссии</li>
-              <li>IT-панель с аналитикой</li>
-              <li>Неограниченная база знаний</li>
-              <li>Приоритетная поддержка 24/5</li>
-            </ul>
-            <a class="button button--primary button--block" href="pages/services.html">Оставить заявку</a>
-          </div>
-          <div class="card price-card">
-            <h3>Корпоративный</h3>
-            <p class="text-muted">От 500 сотрудников</p>
-            <div class="price">по запросу</div>
-            <ul>
-              <li>Интеграция с AD/SSO и 1С</li>
-              <li>Персональный менеджер внедрения</li>
-              <li>Кастомные сценарии диагностики</li>
-              <li>SLA 99.9% и выделенная поддержка</li>
-            </ul>
-            <a class="button button--secondary button--block" href="pages/services.html">Обсудить внедрение</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="landing-section" id="faq">
-        <div class="section-heading">
-          <div>
-            <h2>Частые вопросы</h2>
-            <p class="section-lead">Если ответа нет здесь — загляните в базу знаний или создайте заявку.</p>
-          </div>
-        </div>
-        <div class="faq-list">
-          <div class="card faq-item">
-            <button type="button" class="faq-question" aria-expanded="false">
-              <span>Заменяет ли IT Navigator живого специалиста?</span><span aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer"><div>Нет. Диагностика решает только типовые проблемы, которые действительно можно устранить самостоятельно. Если шаги не помогли, заявка автоматически передаётся специалисту вместе с историей диагностики.</div></div>
-          </div>
-          <div class="card faq-item">
-            <button type="button" class="faq-question" aria-expanded="false">
-              <span>Сколько времени занимает диагностика?</span><span aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer"><div>В среднем 2–3 минуты: выбор категории, один-два уточняющих вопроса и список из 3–4 проверочных шагов.</div></div>
-          </div>
-          <div class="card faq-item">
-            <button type="button" class="faq-question" aria-expanded="false">
-              <span>Что происходит с данными диагностики при создании заявки?</span><span aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer"><div>Ответы пользователя, выполненные проверки и предполагаемая причина автоматически переносятся в описание заявки — специалисту не нужно переспрашивать то, что уже проверено.</div></div>
-          </div>
-          <div class="card faq-item">
-            <button type="button" class="faq-question" aria-expanded="false">
-              <span>Можно ли использовать IT Navigator без интеграции с текущей системой заявок?</span><span aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer"><div>Да, платформа работает как самостоятельный сервис. Интеграция с AD, SSO и внутренними системами доступна на тарифе «Корпоративный».</div></div>
-          </div>
-          <div class="card faq-item">
-            <button type="button" class="faq-question" aria-expanded="false">
-              <span>Что такое IT-миссии?</span><span aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer"><div>Это пошаговые задания на освоение цифровых инструментов компании — например, подключение 2FA или настройка VPN. Они помогают сотрудникам увереннее пользоваться IT-сервисами, а не проходить обучающие «игры».</div></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="landing-section">
-        <div class="cta-banner">
-          <div>
-            <h2>Попробуйте диагностику прямо сейчас</h2>
-            <p>Выберите категорию проблемы — и через пару минут получите решение или готовую заявку специалисту.</p>
-          </div>
-          <a class="button button--primary" style="background: #fff; color: var(--primary);" href="pages/help.html">Нужна помощь</a>
-        </div>
+        </article>
       </section>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p style="max-width: 420px;">IT Navigator — helpdesk, который сначала помогает решить проблему, а затем создаёт готовую заявку для специалиста.</p>
+      <p style="max-width: 520px;">IT Navigator — кабинет сотрудника для решения IT-вопросов, заявок, базы знаний и цифровых навыков.</p>
       <nav class="footer-links" aria-label="Ссылки в подвале">
         <a href="pages/help.html">Нужна помощь</a>
         <a href="pages/knowledge-base.html">База знаний</a>
-        <a href="pages/services.html">Услуги</a>
-        <a href="pages/missions.html">Миссии</a>
-        <a href="pages/dashboard.html">IT-панель</a>
+        <a href="pages/missions.html">Навыки</a>
+        <a href="pages/profile.html">Профиль</a>
       </nav>
     </div>
   </footer>
@@ -311,14 +162,5 @@
   <script src="js/diagnostics.js"></script>
   <script src="js/missions.js"></script>
   <script src="js/app.js"></script>
-  <script>
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        var item = btn.closest('.faq-item');
-        var isOpen = item.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-    });
-  </script>
 </body>
 </html>

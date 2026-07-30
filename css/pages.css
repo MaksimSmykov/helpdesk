@@ -21,7 +21,7 @@
   padding: clamp(22px, 4vw, 36px);
   overflow: visible;
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--primary-soft) 65%, var(--surface)) 0%, var(--surface) 42%);
+    linear-gradient(180deg, color-mix(in srgb, var(--primary-soft) 42%, var(--surface)) 0%, var(--surface) 38%);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
@@ -33,7 +33,7 @@
   inset: 0 auto 0 0;
   width: 3px;
   border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-  background: linear-gradient(180deg, #73c054, var(--primary) 40%, #4f9a32);
+  background: linear-gradient(180deg, #7aaa70, var(--primary) 40%, #54804c);
 }
 
 .employee-profile-card h1 {
@@ -43,11 +43,12 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
+  color: #121a14;
 }
 
 .employee-profile-card .lead {
   margin-top: 10px;
-  color: var(--text-muted);
+  color: #2c3a30;
   font-size: 1.02rem;
 }
 
@@ -287,13 +288,13 @@
 }
 
 .ticket-feed-item--accepted {
-  border-left-color: #5eb03e;
-  background: linear-gradient(90deg, #eef7e8, var(--surface) 32%);
+  border-left-color: #64965a;
+  background: linear-gradient(90deg, #eef3eb, var(--surface) 32%);
 }
 
 .ticket-feed-item--assigned {
-  border-left-color: #4f9a6a;
-  background: linear-gradient(90deg, #e8f4ec, var(--surface) 32%);
+  border-left-color: #5a8f6a;
+  background: linear-gradient(90deg, #eaf2ec, var(--surface) 32%);
 }
 
 .ticket-feed-item--diagnostics {
@@ -1501,6 +1502,13 @@ button.topic-chip {
   .ticket-detail-layout,
   .filter-bar {
     grid-template-columns: 1fr;
+  }
+
+  .ticket-table-block,
+  .ticket-feed-block {
+    min-width: 0;
+    max-width: 100%;
+    overflow: visible;
   }
 
   .category-tile--wide {

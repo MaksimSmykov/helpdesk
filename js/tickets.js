@@ -240,11 +240,12 @@
         var overdueClass = ITN.tickets.isOverdue(ticket) ? " is-overdue" : "";
         var detailUrl = detailBase + "?id=" + encodeURIComponent(ticket.id);
         var toneClass = "tickets-row--" + (ticket.status || "accepted");
+        var statusKey = ticket.status || "accepted";
         var cells =
           '<td data-label="' +
           headers[0] +
           '"><a class="ticket-id-pill ticket-id-pill--' +
-          escapeHtml(ticket.status || "accepted") +
+          escapeHtml(statusKey) +
           '" href="' +
           detailUrl +
           '">' +
@@ -278,8 +279,13 @@
           "</td>" +
           '<td data-label="' +
           headers[5] +
-          '"><span class="ticket-date">' +
+          '"><span class="ticket-date ticket-date--due' +
+          (ITN.tickets.isOverdue(ticket) ? " ticket-date--overdue" : "") +
+          '">' +
           ITN.tickets.formatDate(ticket.dueAt) +
+          (ITN.tickets.isOverdue(ticket)
+            ? ' <span class="ticket-overdue-mark">Просрочено</span>'
+            : "") +
           "</span></td>";
 
         if (isAdmin) {
@@ -293,7 +299,7 @@
           cells +=
             '<td data-label="' +
             headers[6] +
-            '"><span class="ticket-date">' +
+            '"><span class="ticket-date ticket-date--updated">' +
             ITN.tickets.formatDate(ticket.updatedAt) +
             "</span></td>";
         }
@@ -311,16 +317,74 @@
       })
       .join("");
 
+    var cards = tickets
+      .map(function (ticket) {
+        var statusMeta = ITN.STATUS_META[ticket.status] || { label: ticket.status, badge: "" };
+        var priorityMeta = ITN.PRIORITY_META[ticket.priority] || { label: ticket.priority, badge: "" };
+        var detailUrl = detailBase + "?id=" + encodeURIComponent(ticket.id);
+        var statusKey = ticket.status || "accepted";
+        var overdue = ITN.tickets.isOverdue(ticket);
+
+        return (
+          '<a class="ticket-card ticket-card--' +
+          escapeHtml(statusKey) +
+          (overdue ? " is-overdue" : "") +
+          '" href="' +
+          detailUrl +
+          '">' +
+          '<div class="ticket-card__top">' +
+          '<span class="ticket-id-pill ticket-id-pill--' +
+          escapeHtml(statusKey) +
+          '">' +
+          escapeHtml(ticket.id) +
+          "</span>" +
+          '<span class="badge ' +
+          statusMeta.badge +
+          '">' +
+          escapeHtml(statusMeta.label) +
+          "</span></div>" +
+          '<h3 class="ticket-card__title">' +
+          escapeHtml(ticket.title) +
+          "</h3>" +
+          '<div class="ticket-card__meta">' +
+          '<div class="ticket-card__row"><span class="ticket-card__label">Категория</span><span class="ticket-card__value">' +
+          escapeHtml(getCategoryTitle(ticket.category)) +
+          "</span></div>" +
+          '<div class="ticket-card__row"><span class="ticket-card__label">Приоритет</span><span class="ticket-card__value"><span class="badge ' +
+          priorityMeta.badge +
+          '">' +
+          escapeHtml(priorityMeta.label) +
+          "</span></span></div>" +
+          '<div class="ticket-card__row"><span class="ticket-card__label">Исполнитель</span><span class="ticket-card__value">' +
+          escapeHtml(getSpecialistName(ticket.assigneeId)) +
+          "</span></div>" +
+          '<div class="ticket-card__row"><span class="ticket-card__label">Срок</span><span class="ticket-card__value ticket-date ticket-date--due' +
+          (overdue ? " ticket-date--overdue" : "") +
+          '">' +
+          ITN.tickets.formatDate(ticket.dueAt) +
+          (overdue ? ' <span class="ticket-overdue-mark">Просрочено</span>' : "") +
+          "</span></div>" +
+          '<div class="ticket-card__row"><span class="ticket-card__label">Обновлено</span><span class="ticket-card__value ticket-date ticket-date--updated">' +
+          ITN.tickets.formatDate(ticket.updatedAt) +
+          "</span></div>" +
+          "</div></a>"
+        );
+      })
+      .join("");
+
     container.innerHTML =
-      '<div class="table-wrap"><table class="tickets-table' +
+      '<div class="tickets-desktop table-wrap"><table class="tickets-table' +
       (isAdmin ? " tickets-table--admin" : " tickets-table--user") +
       '">' +
       thead +
       "<tbody>" +
       rows +
-      "</tbody></table></div>";
+      "</tbody></table></div>" +
+      '<div class="tickets-mobile" aria-label="Список заявок">' +
+      cards +
+      "</div>";
 
-    container.querySelectorAll("tbody tr").forEach(function (row) {
+    container.querySelectorAll(".tickets-desktop tbody tr").forEach(function (row) {
       function openRow() {
         var id = row.getAttribute("data-ticket-id");
         window.location.href = detailBase + "?id=" + encodeURIComponent(id);

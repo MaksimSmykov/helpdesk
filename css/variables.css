@@ -23,34 +23,34 @@
   --border-elevated: #dce3d8;
   --border-input: #b8c4b6;
 
-  --primary: #5eb03e;
-  --primary-hover: #4f9a32;
-  --primary-soft: #eef7e8;
-  --accent: #5a9e4a;
-  --accent-strong: #4a8a3c;
+  --primary: #64965a;
+  --primary-hover: #54804c;
+  --primary-soft: #eef3eb;
+  --accent: #5c8f5a;
+  --accent-strong: #4d7a4c;
   --cta-gradient: none;
 
-  --teal: #4f9a6a;
-  --teal-hover: #3f8258;
-  --teal-soft: #e8f4ec;
+  --teal: #5a8f6a;
+  --teal-hover: #4a7a58;
+  --teal-soft: #eaf2ec;
   --graphite: #1f2a22;
 
-  --success: #3f8f45;
-  --success-soft: #e8f5e9;
+  --success: #4a8650;
+  --success-soft: #eaf3ea;
   --warning: #a35c00;
   --warning-soft: #fff4de;
   --danger: #b42318;
   --danger-soft: #fdecea;
-  --info: #5eb03e;
-  --info-soft: #eef7e8;
+  --info: #64965a;
+  --info-soft: #eef3eb;
 
   /* Sidebar — светлый, как в референсе */
   --sidebar-bg: #f0f3ee;
   --sidebar-text: #5a665c;
-  --sidebar-text-active: #1f2a22;
-  --sidebar-hover: rgba(94, 176, 62, 0.1);
-  --sidebar-active-bg: rgba(94, 176, 62, 0.16);
-  --sidebar-active: #4f9a32;
+  --sidebar-text-active: #1a241c;
+  --sidebar-hover: rgba(100, 150, 90, 0.1);
+  --sidebar-active-bg: rgba(100, 150, 90, 0.14);
+  --sidebar-active: #54804c;
   --sidebar-section: #7a877c;
   --sidebar-border: #dce3d8;
 

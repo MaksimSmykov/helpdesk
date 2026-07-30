@@ -1,0 +1,123 @@
+/* ================================================================
+   IT Navigator — helpdesk palette (без фиолетового)
+   ================================================================ */
+:root {
+  color-scheme: light;
+
+  --bg: #f4f6f9;
+  --bg-elevated: #eef2f6;
+  --surface: #ffffff;
+  --surface-soft: #f7f9fc;
+  --surface-accent: #e8f1ff;
+  --surface-teal: #e6f7f5;
+
+  --text: #152033;
+  --text-body: #3d4a5c;
+  --text-muted: #5f6b7c;
+  --text-frost: #2b3648;
+  --text-inverse: #ffffff;
+  --text-placeholder: #8b96a8;
+
+  --border: #d9e1ec;
+  --border-strong: #c5cedb;
+  --border-elevated: #d9e1ec;
+  --border-input: #b8c4d6;
+
+  --primary: #3b6ef0;
+  --primary-hover: #2f5cd6;
+  --primary-soft: #eef3ff;
+  --accent: #0d9488;
+  --accent-strong: #0b7f75;
+  --cta-gradient: none;
+
+  --teal: #0d9488;
+  --teal-hover: #0b7f75;
+  --teal-soft: #e6f7f5;
+  --graphite: #152033;
+
+  --success: #0f7a4c;
+  --success-soft: #e6f7ef;
+  --warning: #a35c00;
+  --warning-soft: #fff4de;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+  --info: #3b6ef0;
+  --info-soft: #eef3ff;
+
+  /* Sidebar */
+  --sidebar-bg: #152033;
+  --sidebar-text: #a8b4c7;
+  --sidebar-text-active: #ffffff;
+  --sidebar-hover: rgba(255, 255, 255, 0.06);
+  --sidebar-active-bg: rgba(59, 110, 240, 0.16);
+  --sidebar-active: #7aa0ff;
+  --sidebar-section: #6b7a90;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+
+  --shadow-subtle: 0 0 0 1px rgba(21, 32, 51, 0.06), 0 1px 3px rgba(21, 32, 51, 0.06);
+  --shadow-subtle-2: 0 0 0 1px rgba(21, 32, 51, 0.08);
+  --shadow-sm: 0 4px 14px rgba(21, 32, 51, 0.08);
+  --shadow-md: 0 12px 28px rgba(21, 32, 51, 0.1);
+  --shadow-lg: 0 20px 48px rgba(21, 32, 51, 0.12);
+  --shadow-cta: none;
+  --inset-rim: none;
+  --inset-nav: none;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 9999px;
+  --radius-cards: 12px;
+  --radius-inputs: 10px;
+  --radius-buttons: 9999px;
+
+  --container: 1200px;
+  --header-h: 56px;
+  --sidebar-w: 260px;
+  --space-unit: 4px;
+  --section-gap: 48px;
+  --card-pad: 24px;
+  --element-gap: 8px;
+  --transition: 150ms ease;
+
+  --font: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+
+  --font-weight-light: 400;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --text-caption: 11px;
+  --text-body: 14px;
+  --text-body-lg: 16px;
+  --text-subheading: 18px;
+  --text-heading-sm: 24px;
+  --text-heading: 32px;
+  --text-display: 36px;
+
+  --tracking: -0.01em;
+  --tracking-display: -0.02em;
+
+  /* legacy aliases from Sequence tokens (mapped away from violet) */
+  --color-violet-pulse: var(--primary);
+  --color-indigo-ink: var(--primary);
+  --color-lavender-wash: var(--primary-soft);
+  --color-iris-glow: #bcd0ff;
+  --color-ledger-green: var(--success);
+  --color-paper-white: var(--surface);
+  --color-bone: var(--surface-soft);
+  --color-fog: #eef2f6;
+  --color-silver: var(--border-strong);
+  --color-marble: var(--warning-soft);
+  --color-graphite: var(--text);
+  --color-slate: var(--text-frost);
+  --color-iron: var(--text-body);
+  --color-steel: var(--text-muted);
+  --color-smoke: var(--text-placeholder);
+  --color-ash: var(--border);
+  --color-mist: var(--border-input);
+}

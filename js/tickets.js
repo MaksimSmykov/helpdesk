@@ -228,17 +228,14 @@
       ? ["№ заявки", "Тема", "Статус", "Приоритет", "Исполнитель", "Срок", "Действия"]
       : ["№ заявки", "Тема", "Статус", "Приоритет", "Исполнитель", "Срок", "Обновлено"];
 
-    var thead =
-      "<thead><tr>" +
-      headers
-        .map(function (h) {
-          return '<th scope="col">' + h + "</th>";
-        })
-        .join("") +
-      "</tr></thead>";
+    var headCells = headers
+      .map(function (h) {
+        return '<div class="tickets-grid-table__cell tickets-grid-table__cell--head" role="columnheader">' + h + "</div>";
+      })
+      .join("");
 
     var rows = tickets
-      .map(function (ticket) {
+      .map(function (ticket, index) {
         var statusMeta = ITN.STATUS_META[ticket.status] || { label: ticket.status, badge: "" };
         var priorityMeta = ITN.PRIORITY_META[ticket.priority] || { label: ticket.priority, badge: "" };
         var overdueClass = ITN.tickets.isOverdue(ticket) ? " is-overdue" : "";
@@ -246,83 +243,87 @@
         var toneClass = "tickets-row--" + (ticket.status || "accepted");
         var statusKey = ticket.status || "accepted";
         var cells =
-          '<td data-label="' +
+          '<div class="tickets-grid-table__cell" data-label="' +
           headers[0] +
-          '"><a class="ticket-id-pill ticket-id-pill--' +
+          '" role="cell"><a class="ticket-id-pill ticket-id-pill--' +
           escapeHtml(statusKey) +
           '" href="' +
           detailUrl +
           '">' +
           escapeHtml(ticket.id) +
-          "</a></td>" +
-          '<td data-label="' +
+          "</a></div>" +
+          '<div class="tickets-grid-table__cell" data-label="' +
           headers[1] +
-          '"><div class="ticket-title-cell"><strong>' +
+          '" role="cell"><div class="ticket-title-cell"><strong>' +
           escapeHtml(ticket.title) +
           "</strong><span>" +
           escapeHtml(getCategoryTitle(ticket.category)) +
-          "</span></div></td>" +
-          '<td data-label="' +
+          "</span></div></div>" +
+          '<div class="tickets-grid-table__cell" data-label="' +
           headers[2] +
-          '"><span class="badge ' +
+          '" role="cell"><span class="badge ' +
           statusMeta.badge +
           '">' +
           escapeHtml(statusMeta.label) +
-          "</span></td>" +
-          '<td data-label="' +
+          "</span></div>" +
+          '<div class="tickets-grid-table__cell" data-label="' +
           headers[3] +
-          '"><span class="badge ' +
+          '" role="cell"><span class="badge ' +
           priorityMeta.badge +
           '">' +
           escapeHtml(priorityMeta.label) +
-          "</span></td>" +
-          '<td data-label="' +
+          "</span></div>" +
+          '<div class="tickets-grid-table__cell" data-label="' +
           headers[4] +
-          '">' +
+          '" role="cell">' +
           escapeHtml(getSpecialistName(ticket.assigneeId)) +
-          "</td>" +
-          '<td data-label="' +
+          "</div>" +
+          '<div class="tickets-grid-table__cell tickets-grid-table__cell--due" data-label="' +
           headers[5] +
-          '"><span class="ticket-date ticket-date--due' +
+          '" role="cell"><div class="ticket-due-stack">' +
+          '<span class="ticket-date ticket-date--due' +
           (ITN.tickets.isOverdue(ticket) ? " ticket-date--overdue" : "") +
           '">' +
           ITN.tickets.formatDate(ticket.dueAt) +
+          "</span>" +
           (ITN.tickets.isOverdue(ticket)
-            ? ' <span class="ticket-overdue-mark" title="Срок выполнения уже прошёл, заявка ещё не решена">Срок истёк</span>'
+            ? '<span class="ticket-overdue-mark" title="Срок выполнения уже прошёл, заявка ещё не решена">Срок истёк</span>'
             : "") +
-          "</span></td>";
+          "</div></div>";
 
         if (isAdmin) {
           cells +=
-            '<td data-label="' +
+            '<div class="tickets-grid-table__cell" data-label="' +
             headers[6] +
-            '"><button type="button" class="button button--ghost button--small" data-action="open" data-id="' +
+            '" role="cell"><button type="button" class="button button--ghost button--small" data-action="open" data-id="' +
             escapeHtml(ticket.id) +
-            '">Открыть</button></td>';
+            '">Открыть</button></div>';
         } else {
           cells +=
-            '<td data-label="' +
+            '<div class="tickets-grid-table__cell" data-label="' +
             headers[6] +
-            '"><span class="ticket-date ticket-date--updated">' +
+            '" role="cell"><span class="ticket-date ticket-date--updated">' +
             ITN.tickets.formatDate(ticket.updatedAt) +
-            "</span></td>";
+            "</span></div>";
         }
 
         return (
-          '<tr class="' +
+          '<div class="animated-list-item tickets-grid-table__row ' +
           toneClass +
           overdueClass +
-          '" data-ticket-id="' +
+          '" role="row" data-ticket-id="' +
           escapeHtml(ticket.id) +
+          '" data-index="' +
+          index +
           '" tabindex="0">' +
           cells +
-          "</tr>"
+          "</div>"
         );
       })
       .join("");
 
     var cards = tickets
-      .map(function (ticket) {
+      .map(function (ticket, index) {
         var statusMeta = ITN.STATUS_META[ticket.status] || { label: ticket.status, badge: "" };
         var priorityMeta = ITN.PRIORITY_META[ticket.priority] || { label: ticket.priority, badge: "" };
         var detailUrl = detailBase + "?id=" + encodeURIComponent(ticket.id);
@@ -333,6 +334,8 @@
           '<a class="ticket-card ticket-card--' +
           escapeHtml(statusKey) +
           (overdue ? " is-overdue" : "") +
+          ' animated-list-item" data-index="' +
+          index +
           '" href="' +
           detailUrl +
           '">' +
@@ -362,12 +365,16 @@
           '<div class="ticket-card__row"><span class="ticket-card__label">Исполнитель</span><span class="ticket-card__value">' +
           escapeHtml(getSpecialistName(ticket.assigneeId)) +
           "</span></div>" +
-          '<div class="ticket-card__row"><span class="ticket-card__label">Срок</span><span class="ticket-card__value ticket-date ticket-date--due' +
+          '<div class="ticket-card__row"><span class="ticket-card__label">Срок</span><span class="ticket-card__value"><span class="ticket-due-stack">' +
+          '<span class="ticket-date ticket-date--due' +
           (overdue ? " ticket-date--overdue" : "") +
           '">' +
           ITN.tickets.formatDate(ticket.dueAt) +
-          (overdue ? ' <span class="ticket-overdue-mark" title="Срок выполнения уже прошёл, заявка ещё не решена">Срок истёк</span>' : "") +
-          "</span></div>" +
+          "</span>" +
+          (overdue
+            ? '<span class="ticket-overdue-mark" title="Срок выполнения уже прошёл, заявка ещё не решена">Срок истёк</span>'
+            : "") +
+          "</span></span></div>" +
           '<div class="ticket-card__row"><span class="ticket-card__label">Обновлено</span><span class="ticket-card__value ticket-date ticket-date--updated">' +
           ITN.tickets.formatDate(ticket.updatedAt) +
           "</span></div>" +
@@ -377,18 +384,154 @@
       .join("");
 
     container.innerHTML =
-      '<div class="tickets-desktop table-wrap"><table class="tickets-table' +
-      (isAdmin ? " tickets-table--admin" : " tickets-table--user") +
-      '">' +
-      thead +
-      "<tbody>" +
+      '<div class="scroll-list-container tickets-animated-list">' +
+      '<div class="scroll-list tickets-scroll-list" data-tickets-scroll>' +
+      '<div class="tickets-desktop">' +
+      '<div class="tickets-grid-table' +
+      (isAdmin ? " tickets-grid-table--admin" : " tickets-grid-table--user") +
+      '" role="table" aria-label="Список заявок">' +
+      '<div class="tickets-grid-table__head" role="row">' +
+      headCells +
+      "</div>" +
+      '<div class="tickets-grid-table__body" role="rowgroup">' +
       rows +
-      "</tbody></table></div>" +
+      "</div></div></div>" +
       '<div class="tickets-mobile" aria-label="Список заявок">' +
       cards +
+      "</div>" +
+      "</div>" +
+      '<div class="tickets-list-gradient tickets-list-gradient--top" aria-hidden="true"></div>' +
+      '<div class="tickets-list-gradient tickets-list-gradient--bottom" aria-hidden="true"></div>' +
       "</div>";
 
-    container.querySelectorAll(".tickets-desktop tbody tr").forEach(function (row) {
+    var scrollList = container.querySelector("[data-tickets-scroll]");
+    var topGradient = container.querySelector(".tickets-list-gradient--top");
+    var bottomGradient = container.querySelector(".tickets-list-gradient--bottom");
+    var selectedIndex = -1;
+
+    function getVisibleItems() {
+      var mobile =
+        window.matchMedia && window.matchMedia("(max-width: 900px)").matches;
+      return container.querySelectorAll(
+        mobile
+          ? ".tickets-mobile .animated-list-item"
+          : ".tickets-desktop .animated-list-item"
+      );
+    }
+
+    function updateGradients() {
+      if (!scrollList || !topGradient || !bottomGradient) {
+        return;
+      }
+      var scrollTop = scrollList.scrollTop;
+      var scrollHeight = scrollList.scrollHeight;
+      var clientHeight = scrollList.clientHeight;
+      topGradient.style.opacity = String(Math.min(scrollTop / 50, 1));
+      var bottomDistance = scrollHeight - (scrollTop + clientHeight);
+      bottomGradient.style.opacity = String(
+        scrollHeight <= clientHeight + 2 ? 0 : Math.min(bottomDistance / 50, 1)
+      );
+    }
+
+    function setSelected(index) {
+      selectedIndex = index;
+      getVisibleItems().forEach(function (item) {
+        var itemIndex = Number(item.getAttribute("data-index"));
+        item.classList.toggle("is-selected", itemIndex === selectedIndex);
+      });
+    }
+
+    function openByIndex(index) {
+      var ticket = tickets[index];
+      if (!ticket) {
+        return;
+      }
+      window.location.href = detailBase + "?id=" + encodeURIComponent(ticket.id);
+    }
+
+    if (scrollList) {
+      scrollList.setAttribute("tabindex", "0");
+      scrollList.addEventListener("scroll", updateGradients, { passive: true });
+      updateGradients();
+      scrollList.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          setSelected(Math.min((selectedIndex < 0 ? -1 : selectedIndex) + 1, tickets.length - 1));
+          var next = scrollList.querySelector(
+            '.animated-list-item[data-index="' + selectedIndex + '"]'
+          );
+          if (next && next.scrollIntoView) {
+            next.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          }
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          setSelected(Math.max(selectedIndex - 1, 0));
+          var prev = scrollList.querySelector(
+            '.animated-list-item[data-index="' + selectedIndex + '"]'
+          );
+          if (prev && prev.scrollIntoView) {
+            prev.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          }
+        } else if (event.key === "Enter" && selectedIndex >= 0) {
+          event.preventDefault();
+          openByIndex(selectedIndex);
+        }
+      });
+    }
+
+    var itemObserver = null;
+
+    function bindItemAnimations(items) {
+      if (itemObserver) {
+        itemObserver.disconnect();
+        itemObserver = null;
+      }
+
+      if (typeof IntersectionObserver !== "undefined" && scrollList) {
+        /* AnimatedList: useInView({ amount: 0.5, once: false }) */
+        itemObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-inview");
+              } else {
+                entry.target.classList.remove("is-inview");
+              }
+            });
+          },
+          { root: scrollList, threshold: 0.5 }
+        );
+        items.forEach(function (item) {
+          /* AnimatedList: transition delay 0.1s */
+          item.style.transitionDelay = "0.1s";
+          itemObserver.observe(item);
+        });
+      } else {
+        items.forEach(function (item) {
+          item.classList.add("is-inview");
+        });
+      }
+
+      items.forEach(function (item) {
+        if (item.getAttribute("data-anim-bound") === "true") {
+          return;
+        }
+        item.setAttribute("data-anim-bound", "true");
+        item.addEventListener("mouseenter", function () {
+          setSelected(Number(item.getAttribute("data-index")));
+        });
+      });
+    }
+
+    bindItemAnimations(getVisibleItems());
+    if (typeof window.matchMedia === "function") {
+      window.matchMedia("(max-width: 900px)").addEventListener("change", function () {
+        bindItemAnimations(getVisibleItems());
+        updateGradients();
+      });
+    }
+
+    container.querySelectorAll(".tickets-desktop .tickets-grid-table__row").forEach(function (row) {
       function openRow() {
         var id = row.getAttribute("data-ticket-id");
         window.location.href = detailBase + "?id=" + encodeURIComponent(id);

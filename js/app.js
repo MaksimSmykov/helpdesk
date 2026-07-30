@@ -1212,6 +1212,9 @@
     if (ITN.specularButtons && typeof ITN.specularButtons.init === "function") {
       ITN.specularButtons.init();
     }
+    if (ITN.magicBento && typeof ITN.magicBento.init === "function") {
+      ITN.magicBento.init();
+    }
 
     var page = document.body.getAttribute("data-page") || ITN.nav.getCurrentPage();
     var boot = pageBootHandlers[page];

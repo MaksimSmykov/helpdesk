@@ -6,7 +6,7 @@
   var ITN = window.ITN;
 
   ITN.STORAGE_KEYS = {
-    tickets: "itn_tickets_v2",
+    tickets: "itn_tickets_v3",
     profile: "itn_profile_v1",
     missions: "itn_missions_v1",
     diagnosticSession: "itn_diagnostic_session_v1",
@@ -1226,6 +1226,99 @@
       diagnosticSummary: null,
       history: [
         { at: hoursAgo(50), status: "accepted", note: "Заявка из каталога «Заказ оборудования»", actor: "Иван Петров" }
+      ]
+    },
+    {
+      id: "TKT-2026-0151",
+      title: "Не печатает сетевой принтер HP на 3 этаже",
+      description: "Документы уходят в очередь, но принтер HP LaserJet на этаже «Север-3» ничего не печатает. Ошибка: Offline.",
+      category: "device",
+      status: "diagnostics",
+      priority: "medium",
+      assigneeId: "spec-1",
+      authorId: "user-1",
+      authorName: "Иван Петров",
+      device: "Lenovo ThinkPad T14 (INV-45821)",
+      createdAt: hoursAgo(14),
+      updatedAt: hoursAgo(3),
+      dueAt: hoursFromNow(10),
+      diagnosticSummary: {
+        answers: ["Периферия / принтер"],
+        checks: ["Проверка периферии"],
+        suggestedCause: "Принтер в статусе Offline или сбой драйвера"
+      },
+      history: [
+        { at: hoursAgo(14), status: "accepted", note: "Заявка создана", actor: "Иван Петров" },
+        { at: hoursAgo(10), status: "assigned", note: "Назначен Алексей Воронов", actor: "Диспетчер IT" },
+        { at: hoursAgo(3), status: "diagnostics", note: "Проверка очереди печати и сетевого порта", actor: "Алексей Воронов" }
+      ]
+    },
+    {
+      id: "TKT-2026-0154",
+      title: "Outlook на телефоне не подтягивает новые письма",
+      description: "На iPhone в Outlook письма появляются с задержкой 2–3 часа. На ноутбуке всё приходит сразу.",
+      category: "software",
+      status: "assigned",
+      priority: "high",
+      assigneeId: "spec-2",
+      authorId: "user-1",
+      authorName: "Иван Петров",
+      device: "iPhone 14 / Outlook",
+      createdAt: hoursAgo(8),
+      updatedAt: hoursAgo(5),
+      dueAt: hoursFromNow(3),
+      diagnosticSummary: {
+        answers: ["Корпоративная почта", "Мобильный клиент"],
+        checks: ["Проверка синхронизации"],
+        suggestedCause: "Сбой фоновой синхронизации Outlook Mobile"
+      },
+      history: [
+        { at: hoursAgo(8), status: "accepted", note: "Заявка создана после диагностики", actor: "Иван Петров" },
+        { at: hoursAgo(5), status: "assigned", note: "Назначена Мария Кузнецова", actor: "Диспетчер IT" }
+      ]
+    },
+    {
+      id: "TKT-2026-0158",
+      title: "Нужна установка Adobe Acrobat Pro",
+      description: "Для подготовки коммерческих предложений требуется Adobe Acrobat Pro. В Software Center приложения нет.",
+      category: "install",
+      status: "waiting",
+      priority: "low",
+      assigneeId: "spec-4",
+      authorId: "user-1",
+      authorName: "Иван Петров",
+      device: "Lenovo ThinkPad T14 (INV-45821)",
+      createdAt: hoursAgo(40),
+      updatedAt: hoursAgo(16),
+      dueAt: hoursFromNow(32),
+      diagnosticSummary: null,
+      history: [
+        { at: hoursAgo(40), status: "accepted", note: "Заявка из каталога «Установка программы»", actor: "Иван Петров" },
+        { at: hoursAgo(28), status: "assigned", note: "Назначена Елена Морозова", actor: "Диспетчер IT" },
+        { at: hoursAgo(16), status: "waiting", note: "Ожидается согласование лицензии у руководителя", actor: "Елена Морозова" }
+      ]
+    },
+    {
+      id: "TKT-2026-0162",
+      title: "Ноутбук сильно греется и тормозит",
+      description: "При работе в Excel и браузере с 10+ вкладками ноутбук шумит, греется и подвисает. Раньше такого не было.",
+      category: "device",
+      status: "accepted",
+      priority: "critical",
+      assigneeId: null,
+      authorId: "user-1",
+      authorName: "Иван Петров",
+      device: "Lenovo ThinkPad T14 (INV-45821)",
+      createdAt: hoursAgo(2),
+      updatedAt: hoursAgo(2),
+      dueAt: hoursFromNow(2),
+      diagnosticSummary: {
+        answers: ["Производительность устройства"],
+        checks: ["Проверка производительности"],
+        suggestedCause: "Высокая нагрузка CPU или пыль в системе охлаждения"
+      },
+      history: [
+        { at: hoursAgo(2), status: "accepted", note: "Срочная заявка создана", actor: "Иван Петров" }
       ]
     }
   ];

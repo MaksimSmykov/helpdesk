@@ -195,7 +195,11 @@
     if (!ticket || !ticket.dueAt || ticket.status === "resolved") {
       return false;
     }
-    return new Date(ticket.dueAt).getTime() < Date.now();
+    var dueMs = new Date(ticket.dueAt).getTime();
+    if (isNaN(dueMs)) {
+      return false;
+    }
+    return dueMs < Date.now();
   };
 
   ITN.tickets.renderList = function (container, tickets, options) {
@@ -284,7 +288,7 @@
           '">' +
           ITN.tickets.formatDate(ticket.dueAt) +
           (ITN.tickets.isOverdue(ticket)
-            ? ' <span class="ticket-overdue-mark">Просрочено</span>'
+            ? ' <span class="ticket-overdue-mark" title="Срок выполнения уже прошёл, заявка ещё не решена">Срок истёк</span>'
             : "") +
           "</span></td>";
 
@@ -362,7 +366,7 @@
           (overdue ? " ticket-date--overdue" : "") +
           '">' +
           ITN.tickets.formatDate(ticket.dueAt) +
-          (overdue ? ' <span class="ticket-overdue-mark">Просрочено</span>' : "") +
+          (overdue ? ' <span class="ticket-overdue-mark" title="Срок выполнения уже прошёл, заявка ещё не решена">Срок истёк</span>' : "") +
           "</span></div>" +
           '<div class="ticket-card__row"><span class="ticket-card__label">Обновлено</span><span class="ticket-card__value ticket-date ticket-date--updated">' +
           ITN.tickets.formatDate(ticket.updatedAt) +

@@ -6,7 +6,7 @@
   var ITN = window.ITN;
 
   ITN.STORAGE_KEYS = {
-    tickets: "itn_tickets_v1",
+    tickets: "itn_tickets_v2",
     profile: "itn_profile_v1",
     missions: "itn_missions_v1",
     diagnosticSession: "itn_diagnostic_session_v1",
@@ -1103,6 +1103,14 @@
     }
   ];
 
+  function hoursAgo(hours) {
+    return new Date(Date.now() - hours * 3600000).toISOString();
+  }
+
+  function hoursFromNow(hours) {
+    return new Date(Date.now() + hours * 3600000).toISOString();
+  }
+
   ITN.DEMO_TICKETS = [
     {
       id: "TKT-2026-0142",
@@ -1115,18 +1123,18 @@
       authorId: "user-1",
       authorName: "Иван Петров",
       device: "Lenovo ThinkPad T14 (INV-45821)",
-      createdAt: "2026-07-20T09:15:00.000Z",
-      updatedAt: "2026-07-21T14:30:00.000Z",
-      dueAt: "2026-07-21T17:15:00.000Z",
+      createdAt: hoursAgo(30),
+      updatedAt: hoursAgo(6),
+      dueAt: hoursFromNow(18),
       diagnosticSummary: {
         answers: ["Корпоративный портал / SSO", "Неверный пароль или логин"],
         checks: ["Проверка пароля и синхронизации"],
         suggestedCause: "Рассинхронизация пароля между AD и CRM"
       },
       history: [
-        { at: "2026-07-20T09:15:00.000Z", status: "accepted", note: "Заявка принята автоматически", actor: "Система" },
-        { at: "2026-07-20T11:00:00.000Z", status: "assigned", note: "Назначен специалист Мария Кузнецова", actor: "Диспетчер IT" },
-        { at: "2026-07-21T14:30:00.000Z", status: "diagnostics", note: "Проверка синхронизации AD → CRM", actor: "Мария Кузнецова" }
+        { at: hoursAgo(30), status: "accepted", note: "Заявка принята автоматически", actor: "Система" },
+        { at: hoursAgo(24), status: "assigned", note: "Назначен специалист Мария Кузнецова", actor: "Диспетчер IT" },
+        { at: hoursAgo(6), status: "diagnostics", note: "Проверка синхронизации AD → CRM", actor: "Мария Кузнецова" }
       ]
     },
     {
@@ -1140,19 +1148,19 @@
       authorId: "user-1",
       authorName: "Иван Петров",
       device: "Lenovo ThinkPad T14 (INV-45821)",
-      createdAt: "2026-07-19T07:40:00.000Z",
-      updatedAt: "2026-07-22T08:00:00.000Z",
-      dueAt: "2026-07-20T07:40:00.000Z",
+      createdAt: hoursAgo(72),
+      updatedAt: hoursAgo(20),
+      dueAt: hoursAgo(36),
       diagnosticSummary: {
         answers: ["Не подключается VPN", "Таймаут подключения"],
         checks: ["Проверка маршрутизации VPN"],
         suggestedCause: "Возможна блокировка UDP-портов провайдером"
       },
       history: [
-        { at: "2026-07-19T07:40:00.000Z", status: "accepted", note: "Заявка создана", actor: "Иван Петров" },
-        { at: "2026-07-19T10:00:00.000Z", status: "assigned", note: "Назначен Дмитрий Соколов", actor: "Диспетчер IT" },
-        { at: "2026-07-20T15:00:00.000Z", status: "diagnostics", note: "Анализ логов VPN-клиента", actor: "Дмитрий Соколов" },
-        { at: "2026-07-22T08:00:00.000Z", status: "waiting", note: "Ожидается ответ пользователя: результат ping vpn2", actor: "Дмитрий Соколов" }
+        { at: hoursAgo(72), status: "accepted", note: "Заявка создана", actor: "Иван Петров" },
+        { at: hoursAgo(60), status: "assigned", note: "Назначен Дмитрий Соколов", actor: "Диспетчер IT" },
+        { at: hoursAgo(40), status: "diagnostics", note: "Анализ логов VPN-клиента", actor: "Дмитрий Соколов" },
+        { at: hoursAgo(20), status: "waiting", note: "Ожидается ответ пользователя: результат ping vpn2", actor: "Дмитрий Соколов" }
       ]
     },
     {
@@ -1166,13 +1174,13 @@
       authorId: "user-1",
       authorName: "Иван Петров",
       device: "Lenovo ThinkPad T14 (INV-45821)",
-      createdAt: "2026-07-18T13:20:00.000Z",
-      updatedAt: "2026-07-19T09:00:00.000Z",
-      dueAt: "2026-07-21T13:20:00.000Z",
+      createdAt: hoursAgo(20),
+      updatedAt: hoursAgo(12),
+      dueAt: hoursFromNow(52),
       diagnosticSummary: null,
       history: [
-        { at: "2026-07-18T13:20:00.000Z", status: "accepted", note: "Заявка из каталога IT-услуг", actor: "Иван Петров" },
-        { at: "2026-07-19T09:00:00.000Z", status: "assigned", note: "Назначена Елена Морозова", actor: "Диспетчер IT" }
+        { at: hoursAgo(20), status: "accepted", note: "Заявка из каталога IT-услуг", actor: "Иван Петров" },
+        { at: hoursAgo(12), status: "assigned", note: "Назначена Елена Морозова", actor: "Диспетчер IT" }
       ]
     },
     {
@@ -1186,19 +1194,19 @@
       authorId: "user-1",
       authorName: "Иван Петров",
       device: "Lenovo ThinkPad T14 (INV-45821)",
-      createdAt: "2026-07-15T10:00:00.000Z",
-      updatedAt: "2026-07-16T16:45:00.000Z",
-      dueAt: "2026-07-16T10:00:00.000Z",
+      createdAt: hoursAgo(96),
+      updatedAt: hoursAgo(70),
+      dueAt: hoursAgo(78),
       diagnosticSummary: {
         answers: ["Microsoft Office / Teams"],
         checks: ["Проверка Office и Teams"],
         suggestedCause: "Повреждённый кэш Teams после обновления ОС"
       },
       history: [
-        { at: "2026-07-15T10:00:00.000Z", status: "accepted", note: "Заявка создана", actor: "Иван Петров" },
-        { at: "2026-07-15T11:30:00.000Z", status: "assigned", note: "Назначен Алексей Воронов", actor: "Диспетчер IT" },
-        { at: "2026-07-16T14:00:00.000Z", status: "diagnostics", note: "Очистка кэша Teams", actor: "Алексей Воронов" },
-        { at: "2026-07-16T16:45:00.000Z", status: "resolved", note: "Teams запускается штатно после очистки кэша", actor: "Алексей Воронов" }
+        { at: hoursAgo(96), status: "accepted", note: "Заявка создана", actor: "Иван Петров" },
+        { at: hoursAgo(90), status: "assigned", note: "Назначен Алексей Воронов", actor: "Диспетчер IT" },
+        { at: hoursAgo(80), status: "diagnostics", note: "Очистка кэша Teams", actor: "Алексей Воронов" },
+        { at: hoursAgo(70), status: "resolved", note: "Teams запускается штатно после очистки кэша", actor: "Алексей Воронов" }
       ]
     },
     {
@@ -1212,12 +1220,12 @@
       authorId: "user-1",
       authorName: "Иван Петров",
       device: "—",
-      createdAt: "2026-07-22T06:30:00.000Z",
-      updatedAt: "2026-07-22T06:30:00.000Z",
-      dueAt: "2026-07-25T06:30:00.000Z",
+      createdAt: hoursAgo(50),
+      updatedAt: hoursAgo(50),
+      dueAt: hoursAgo(14),
       diagnosticSummary: null,
       history: [
-        { at: "2026-07-22T06:30:00.000Z", status: "accepted", note: "Заявка из каталога «Заказ оборудования»", actor: "Иван Петров" }
+        { at: hoursAgo(50), status: "accepted", note: "Заявка из каталога «Заказ оборудования»", actor: "Иван Петров" }
       ]
     }
   ];

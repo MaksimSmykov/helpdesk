@@ -57,12 +57,12 @@
   var PRESETS = {
     primary: {
       radius: 10,
-      tint: "#3b6ef0",
+      tint: "#5eb03e",
       tintOpacity: 1,
       blur: 0,
       textColor: "#ffffff",
-      lineColor: "#c9daff",
-      baseColor: "#2548a8",
+      lineColor: "#d4f0c4",
+      baseColor: "#3a7a28",
       intensity: 0.72,
       shineSize: 9,
       shineFade: 36,
@@ -74,12 +74,12 @@
     },
     teal: {
       radius: 10,
-      tint: "#3b6ef0",
+      tint: "#4f9a6a",
       tintOpacity: 1,
       blur: 0,
       textColor: "#ffffff",
-      lineColor: "#c9daff",
-      baseColor: "#2548a8",
+      lineColor: "#c8ebd6",
+      baseColor: "#2f6b46",
       intensity: 0.72,
       shineSize: 9,
       shineFade: 36,
@@ -94,9 +94,9 @@
       tint: "#ffffff",
       tintOpacity: 1,
       blur: 0,
-      textColor: "#152033",
-      lineColor: "#7aa0ff",
-      baseColor: "#9aa8bd",
+      textColor: "#1f2a22",
+      lineColor: "#7bc45a",
+      baseColor: "#9aab94",
       intensity: 0.55,
       shineSize: 8,
       shineFade: 34,
@@ -145,9 +145,9 @@
       tint: "#ffffff",
       tintOpacity: 0,
       blur: 0,
-      textColor: "#5f6b7c",
-      lineColor: "#7aa0ff",
-      baseColor: "#a8b4c7",
+      textColor: "#5f6b62",
+      lineColor: "#7bc45a",
+      baseColor: "#9aab94",
       intensity: 0.35,
       shineSize: 8,
       shineFade: 34,
@@ -162,9 +162,9 @@
       tint: "#ffffff",
       tintOpacity: 1,
       blur: 0,
-      textColor: "#152033",
-      lineColor: "#7aa0ff",
-      baseColor: "#9aa8bd",
+      textColor: "#1f2a22",
+      lineColor: "#7bc45a",
+      baseColor: "#9aab94",
       intensity: 0.55,
       shineSize: 8,
       shineFade: 34,
@@ -466,6 +466,17 @@
       return;
     }
     if (button.closest(".app-sidebar")) {
+      return;
+    }
+    /* Compact / soft-action buttons keep plain CSS — specular FX ломает их вид */
+    if (
+      button.classList.contains("button--small") ||
+      button.classList.contains("button--success") ||
+      button.classList.contains("button--danger") ||
+      button.classList.contains("button--ghost") ||
+      button.closest(".rating-row")
+    ) {
+      button.setAttribute("data-specular-ready", "skip");
       return;
     }
 

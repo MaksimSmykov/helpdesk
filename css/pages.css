@@ -20,14 +20,20 @@
   position: relative;
   padding: clamp(22px, 4vw, 36px);
   overflow: visible;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--primary-soft) 65%, var(--surface)) 0%, var(--surface) 42%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .employee-profile-card::before {
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
-  width: 2px;
-  background: var(--primary);
+  width: 3px;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  background: linear-gradient(180deg, #73c054, var(--primary) 40%, #4f9a32);
 }
 
 .employee-profile-card h1 {
@@ -281,13 +287,13 @@
 }
 
 .ticket-feed-item--accepted {
-  border-left-color: var(--info);
-  background: linear-gradient(90deg, var(--info-soft), var(--surface) 32%);
+  border-left-color: #5eb03e;
+  background: linear-gradient(90deg, #eef7e8, var(--surface) 32%);
 }
 
 .ticket-feed-item--assigned {
-  border-left-color: var(--primary);
-  background: linear-gradient(90deg, var(--primary-soft), var(--surface) 32%);
+  border-left-color: #4f9a6a;
+  background: linear-gradient(90deg, #e8f4ec, var(--surface) 32%);
 }
 
 .ticket-feed-item--diagnostics {
@@ -296,8 +302,8 @@
 }
 
 .ticket-feed-item--waiting {
-  border-left-color: #ca8a04;
-  background: linear-gradient(90deg, #fef3c7, var(--surface) 32%);
+  border-left-color: #8b6bb5;
+  background: linear-gradient(90deg, #f3eef8, var(--surface) 32%);
 }
 
 .ticket-feed-item--resolved {
@@ -510,6 +516,13 @@
 .category-tile:hover {
   border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
   box-shadow: none;
+}
+
+.category-tile:focus-visible,
+.category-tile.is-active {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  background: color-mix(in srgb, var(--primary-soft) 70%, var(--surface));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 .category-tile--wide {
@@ -783,6 +796,7 @@ button.topic-chip {
   background:
     radial-gradient(circle at 0% 50%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 42%),
     var(--surface);
+  overflow: hidden;
 }
 
 .cta-strip h2 {
@@ -799,6 +813,11 @@ button.topic-chip {
   flex-wrap: wrap;
   gap: 10px;
   flex-shrink: 0;
+  align-items: center;
+}
+
+.cta-strip-actions .button {
+  overflow: hidden;
 }
 
 /* Skills page: compact horizontal rows + detail below */
@@ -1375,8 +1394,10 @@ button.topic-chip {
 
 .rating-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 14px;
+  align-items: center;
 }
 
 .detail-grid {

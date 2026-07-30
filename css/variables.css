@@ -1,64 +1,64 @@
 /* ================================================================
-   IT Navigator — helpdesk palette (без фиолетового)
+   IT Navigator — мягкая зелёная палитра (ненасыщенная)
    ================================================================ */
 :root {
   color-scheme: light;
 
-  --bg: #f4f6f9;
-  --bg-elevated: #eef2f6;
+  --bg: #f4f6f2;
+  --bg-elevated: #eef2eb;
   --surface: #ffffff;
-  --surface-soft: #f7f9fc;
-  --surface-accent: #e8f1ff;
-  --surface-teal: #e6f7f5;
+  --surface-soft: #f7f9f5;
+  --surface-accent: #eef7e8;
+  --surface-teal: #e8f4ec;
 
-  --text: #152033;
-  --text-body: #3d4a5c;
-  --text-muted: #5f6b7c;
-  --text-frost: #2b3648;
+  --text: #1f2a22;
+  --text-body: #3d4a40;
+  --text-muted: #5f6b62;
+  --text-frost: #2b362e;
   --text-inverse: #ffffff;
-  --text-placeholder: #8b96a8;
+  --text-placeholder: #8b968c;
 
-  --border: #d9e1ec;
-  --border-strong: #c5cedb;
-  --border-elevated: #d9e1ec;
-  --border-input: #b8c4d6;
+  --border: #dce3d8;
+  --border-strong: #c5d0c0;
+  --border-elevated: #dce3d8;
+  --border-input: #b8c4b6;
 
-  --primary: #3b6ef0;
-  --primary-hover: #2f5cd6;
-  --primary-soft: #eef3ff;
-  --accent: #0d9488;
-  --accent-strong: #0b7f75;
+  --primary: #5eb03e;
+  --primary-hover: #4f9a32;
+  --primary-soft: #eef7e8;
+  --accent: #5a9e4a;
+  --accent-strong: #4a8a3c;
   --cta-gradient: none;
 
-  --teal: #0d9488;
-  --teal-hover: #0b7f75;
-  --teal-soft: #e6f7f5;
-  --graphite: #152033;
+  --teal: #4f9a6a;
+  --teal-hover: #3f8258;
+  --teal-soft: #e8f4ec;
+  --graphite: #1f2a22;
 
-  --success: #0f7a4c;
-  --success-soft: #e6f7ef;
+  --success: #3f8f45;
+  --success-soft: #e8f5e9;
   --warning: #a35c00;
   --warning-soft: #fff4de;
   --danger: #b42318;
   --danger-soft: #fdecea;
-  --info: #3b6ef0;
-  --info-soft: #eef3ff;
+  --info: #5eb03e;
+  --info-soft: #eef7e8;
 
-  /* Sidebar */
-  --sidebar-bg: #152033;
-  --sidebar-text: #a8b4c7;
-  --sidebar-text-active: #ffffff;
-  --sidebar-hover: rgba(255, 255, 255, 0.06);
-  --sidebar-active-bg: rgba(59, 110, 240, 0.16);
-  --sidebar-active: #7aa0ff;
-  --sidebar-section: #6b7a90;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
+  /* Sidebar — светлый, как в референсе */
+  --sidebar-bg: #f0f3ee;
+  --sidebar-text: #5a665c;
+  --sidebar-text-active: #1f2a22;
+  --sidebar-hover: rgba(94, 176, 62, 0.1);
+  --sidebar-active-bg: rgba(94, 176, 62, 0.16);
+  --sidebar-active: #4f9a32;
+  --sidebar-section: #7a877c;
+  --sidebar-border: #dce3d8;
 
-  --shadow-subtle: 0 0 0 1px rgba(21, 32, 51, 0.06), 0 1px 3px rgba(21, 32, 51, 0.06);
-  --shadow-subtle-2: 0 0 0 1px rgba(21, 32, 51, 0.08);
-  --shadow-sm: 0 4px 14px rgba(21, 32, 51, 0.08);
-  --shadow-md: 0 12px 28px rgba(21, 32, 51, 0.1);
-  --shadow-lg: 0 20px 48px rgba(21, 32, 51, 0.12);
+  --shadow-subtle: 0 0 0 1px rgba(31, 42, 34, 0.06), 0 1px 3px rgba(31, 42, 34, 0.05);
+  --shadow-subtle-2: 0 0 0 1px rgba(31, 42, 34, 0.08);
+  --shadow-sm: 0 4px 14px rgba(31, 42, 34, 0.07);
+  --shadow-md: 0 12px 28px rgba(31, 42, 34, 0.09);
+  --shadow-lg: 0 20px 48px rgba(31, 42, 34, 0.11);
   --shadow-cta: none;
   --inset-rim: none;
   --inset-nav: none;
@@ -70,7 +70,7 @@
   --radius-pill: 9999px;
   --radius-cards: 12px;
   --radius-inputs: 10px;
-  --radius-buttons: 9999px;
+  --radius-buttons: 12px;
 
   --container: 1200px;
   --header-h: 56px;
@@ -102,15 +102,14 @@
   --tracking: -0.01em;
   --tracking-display: -0.02em;
 
-  /* legacy aliases from Sequence tokens (mapped away from violet) */
   --color-violet-pulse: var(--primary);
   --color-indigo-ink: var(--primary);
   --color-lavender-wash: var(--primary-soft);
-  --color-iris-glow: #bcd0ff;
+  --color-iris-glow: #c5e6b5;
   --color-ledger-green: var(--success);
   --color-paper-white: var(--surface);
   --color-bone: var(--surface-soft);
-  --color-fog: #eef2f6;
+  --color-fog: #eef2eb;
   --color-silver: var(--border-strong);
   --color-marble: var(--warning-soft);
   --color-graphite: var(--text);

@@ -219,89 +219,123 @@
       return;
     }
 
-    if (mode !== "admin") {
-      container.innerHTML = tickets
-        .map(function (ticket) {
-          var statusMeta = ITN.STATUS_META[ticket.status] || { label: ticket.status, badge: "" };
-          var priorityMeta = ITN.PRIORITY_META[ticket.priority] || { label: ticket.priority, badge: "" };
-          var detailUrl = detailBase + "?id=" + encodeURIComponent(ticket.id);
-          var toneMap = {
-            accepted: " ticket-feed-item--accepted",
-            assigned: " ticket-feed-item--assigned",
-            diagnostics: " ticket-feed-item--diagnostics",
-            waiting: " ticket-feed-item--waiting",
-            resolved: " ticket-feed-item--resolved"
-          };
-          var tone = toneMap[ticket.status] || "";
+    var isAdmin = mode === "admin";
+    var headers = isAdmin
+      ? ["№ заявки", "Тема", "Статус", "Приоритет", "Исполнитель", "Срок", "Действия"]
+      : ["№ заявки", "Тема", "Статус", "Приоритет", "Исполнитель", "Срок", "Обновлено"];
 
-          return (
-            '<a class="ticket-feed-item' +
-            tone +
-            '" href="' +
-            detailUrl +
-            '">' +
-            '<div class="ticket-feed-top"><span class="ticket-id">' +
-            escapeHtml(ticket.id) +
-            '</span><span class="badge ' +
-            statusMeta.badge +
-            '">' +
-            escapeHtml(statusMeta.label) +
-            "</span></div>" +
-            "<strong>" +
-            escapeHtml(ticket.title) +
-            "</strong>" +
-            "<small>" +
-            escapeHtml(getCategoryTitle(ticket.category)) +
-            " · " +
-            escapeHtml(priorityMeta.label) +
-            " · обновлено " +
-            ITN.tickets.formatDate(ticket.updatedAt) +
-            "</small></a>"
-          );
+    var thead =
+      "<thead><tr>" +
+      headers
+        .map(function (h) {
+          return '<th scope="col">' + h + "</th>";
         })
-        .join("");
-      return;
-    }
+        .join("") +
+      "</tr></thead>";
 
-    var tableClass = "tickets-table tickets-table--admin";
-    var headers = ["Номер", "Тема", "Статус", "Приоритет", "Исполнитель", "Срок", "Действия"];
+    var rows = tickets
+      .map(function (ticket) {
+        var statusMeta = ITN.STATUS_META[ticket.status] || { label: ticket.status, badge: "" };
+        var priorityMeta = ITN.PRIORITY_META[ticket.priority] || { label: ticket.priority, badge: "" };
+        var overdueClass = ITN.tickets.isOverdue(ticket) ? " is-overdue" : "";
+        var detailUrl = detailBase + "?id=" + encodeURIComponent(ticket.id);
+        var toneClass = "tickets-row--" + (ticket.status || "accepted");
+        var cells =
+          '<td data-label="' +
+          headers[0] +
+          '"><a class="ticket-id-pill ticket-id-pill--' +
+          escapeHtml(ticket.status || "accepted") +
+          '" href="' +
+          detailUrl +
+          '">' +
+          escapeHtml(ticket.id) +
+          "</a></td>" +
+          '<td data-label="' +
+          headers[1] +
+          '"><div class="ticket-title-cell"><strong>' +
+          escapeHtml(ticket.title) +
+          "</strong><span>" +
+          escapeHtml(getCategoryTitle(ticket.category)) +
+          "</span></div></td>" +
+          '<td data-label="' +
+          headers[2] +
+          '"><span class="badge ' +
+          statusMeta.badge +
+          '">' +
+          escapeHtml(statusMeta.label) +
+          "</span></td>" +
+          '<td data-label="' +
+          headers[3] +
+          '"><span class="badge ' +
+          priorityMeta.badge +
+          '">' +
+          escapeHtml(priorityMeta.label) +
+          "</span></td>" +
+          '<td data-label="' +
+          headers[4] +
+          '">' +
+          escapeHtml(getSpecialistName(ticket.assigneeId)) +
+          "</td>" +
+          '<td data-label="' +
+          headers[5] +
+          '"><span class="ticket-date">' +
+          ITN.tickets.formatDate(ticket.dueAt) +
+          "</span></td>";
 
-    var thead = "<thead><tr>" + headers.map(function (h) {
-      return "<th scope=\"col\">" + h + "</th>";
-    }).join("") + "</tr></thead>";
+        if (isAdmin) {
+          cells +=
+            '<td data-label="' +
+            headers[6] +
+            '"><button type="button" class="button button--ghost button--small" data-action="open" data-id="' +
+            escapeHtml(ticket.id) +
+            '">Открыть</button></td>';
+        } else {
+          cells +=
+            '<td data-label="' +
+            headers[6] +
+            '"><span class="ticket-date">' +
+            ITN.tickets.formatDate(ticket.updatedAt) +
+            "</span></td>";
+        }
 
-    var rows = tickets.map(function (ticket) {
-      var statusMeta = ITN.STATUS_META[ticket.status] || { label: ticket.status, badge: "" };
-      var priorityMeta = ITN.PRIORITY_META[ticket.priority] || { label: ticket.priority, badge: "" };
-      var overdueClass = ITN.tickets.isOverdue(ticket) ? " is-overdue" : "";
-      var detailUrl = detailBase + "?id=" + encodeURIComponent(ticket.id);
-
-      var cells =
-        "<td data-label=\"" + headers[0] + "\"><a class=\"ticket-id\" href=\"" + detailUrl + "\">" + ticket.id + "</a></td>" +
-        "<td data-label=\"" + headers[1] + "\"><div class=\"ticket-title-cell\"><strong>" + escapeHtml(ticket.title) + "</strong><span>" + escapeHtml(getCategoryTitle(ticket.category)) + "</span></div></td>" +
-        "<td data-label=\"" + headers[2] + "\"><span class=\"badge " + statusMeta.badge + "\">" + statusMeta.label + "</span></td>" +
-        "<td data-label=\"" + headers[3] + "\"><span class=\"badge " + priorityMeta.badge + "\">" + priorityMeta.label + "</span></td>" +
-        "<td data-label=\"" + headers[4] + "\">" + escapeHtml(getSpecialistName(ticket.assigneeId)) + "</td>" +
-        "<td data-label=\"" + headers[5] + "\"><span class=\"ticket-date\">" + ITN.tickets.formatDate(ticket.dueAt) + "</span></td>" +
-        "<td data-label=\"" + headers[6] + "\">" +
-        "<button type=\"button\" class=\"button button--ghost button--small\" data-action=\"open\" data-id=\"" + ticket.id + "\">Открыть</button>" +
-        "</td>";
-
-      return "<tr class=\"" + overdueClass.trim() + "\" data-ticket-id=\"" + ticket.id + "\">" + cells + "</tr>";
-    }).join("");
+        return (
+          '<tr class="' +
+          toneClass +
+          overdueClass +
+          '" data-ticket-id="' +
+          escapeHtml(ticket.id) +
+          '" tabindex="0">' +
+          cells +
+          "</tr>"
+        );
+      })
+      .join("");
 
     container.innerHTML =
-      '<div class="table-wrap"><table class="' + tableClass + '">' +
+      '<div class="table-wrap"><table class="tickets-table' +
+      (isAdmin ? " tickets-table--admin" : " tickets-table--user") +
+      '">' +
       thead +
-      "<tbody>" + rows + "</tbody></table></div>";
+      "<tbody>" +
+      rows +
+      "</tbody></table></div>";
 
     container.querySelectorAll("tbody tr").forEach(function (row) {
+      function openRow() {
+        var id = row.getAttribute("data-ticket-id");
+        window.location.href = detailBase + "?id=" + encodeURIComponent(id);
+      }
       row.addEventListener("click", function (event) {
         if (event.target.closest("button, a")) {
           return;
         }
-        var id = row.getAttribute("data-ticket-id");
-        window.location.href = detailBase + "?id=" + encodeURIComponent(id);
+        openRow();
+      });
+      row.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openRow();
+        }
       });
     });
 
@@ -311,7 +345,8 @@
         if (onAction) {
           onAction(button.getAttribute("data-action"), button.getAttribute("data-id"));
         } else {
-          window.location.href = detailBase + "?id=" + encodeURIComponent(button.getAttribute("data-id"));
+          window.location.href =
+            detailBase + "?id=" + encodeURIComponent(button.getAttribute("data-id"));
         }
       });
     });
